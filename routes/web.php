@@ -63,6 +63,19 @@ Route::group(['middleware' => 'auth'], function () {
     });
     //DEPARTAMENTO END
 
+     //INSTITUICAO START
+     Route::prefix('instituicao')->group(function () {
+
+        Route::get('/create', ['as' => 'admin.instituicao.create', 'uses' => 'InstituicaoController@create']);
+        Route::get('/edit/{id}', ['as' => 'admin.instituicao.edit', 'uses' => 'InstituicaoController@edit']);
+        Route::post('/store', ['as' => 'admin.instituicao.store', 'uses' => 'InstituicaoController@store']);
+        Route::get('/list', ['as' => 'admin.instituicao.list', 'uses' => 'InstituicaoController@list']);
+        Route::get('/delete/{id}', ['as' => 'admin.instituicao.delete', 'uses' => 'InstituicaoController@delete']);
+        Route::put('/update/{id}', ['as' => 'admin.instituicao.update', 'uses' => 'InstituicaoController@update']);
+        Route::get('/purge/{id}', ['as' => 'admin.instituicao.purge', 'uses' => 'InstituicaoController@purge']);
+    });
+    //INSTITUICAO END
+
     //FUNÇÃO START
     Route::prefix('funcao')->group(function () {
 

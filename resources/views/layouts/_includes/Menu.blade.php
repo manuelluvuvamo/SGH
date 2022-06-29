@@ -249,7 +249,12 @@
 
       <li class="nav-heading">Recursos Humanos</li>
 
-     
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="{{route('admin.instituicao.list')}}">
+          <i class="bi bi-bank"></i>
+          <span>Instituição</span>
+        </a>
+      </li><!-- End Departamentos Page Nav -->
 
       <li class="nav-item">
         <a class="nav-link collapsed" href="{{route('admin.departamento.list')}}">
