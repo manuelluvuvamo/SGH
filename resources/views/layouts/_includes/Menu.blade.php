@@ -255,7 +255,7 @@
 
       <li class="nav-item">
         <a class="nav-link collapsed" href="{{route('admin.instituicao.list')}}">
-          <i class="bi bi-bank"></i>
+          <i class="bi bi-building"></i>
           <span>Instituição</span>
         </a>
       </li><!-- End Departamentos Page Nav -->
@@ -269,10 +269,17 @@
 
       <li class="nav-item">
         <a class="nav-link collapsed" href="{{route('admin.funcao.list')}}">
-          <i class="bi bi-folder2"></i>
+          <i class="bi bi-briefcase"></i>
           <span>Funções</span>
         </a>
       </li><!-- End User Page Nav -->
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="{{route('admin.funcionario.list')}}">
+          <i class="bi bi-file-person"></i>
+          <span>Funcionários</span>
+        </a>
+      </li><!-- End Funcionários Page Nav -->
 
       
 

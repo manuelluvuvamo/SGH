@@ -89,4 +89,18 @@ Route::group(['middleware' => 'auth'], function () {
     });
     //FUNÇÃO END
 
+    //FUNCIONARIO START
+    Route::prefix('funcionario')->group(function () {
+
+        Route::get('/create', ['as' => 'admin.funcionario.create', 'uses' => 'FuncionarioController@create']);
+        Route::get('/edit/{id}', ['as' => 'admin.funcionario.edit', 'uses' => 'FuncionarioController@edit']);
+        Route::post('/store', ['as' => 'admin.funcionario.store', 'uses' => 'FuncionarioController@store']);
+        Route::get('/list', ['as' => 'admin.funcionario.list', 'uses' => 'FuncionarioController@list']);
+        Route::get('/delete/{id}', ['as' => 'admin.funcionario.delete', 'uses' => 'FuncionarioController@delete']);
+        Route::put('/update/{id}', ['as' => 'admin.funcionario.update', 'uses' => 'FuncionarioController@update']);
+        Route::get('/purge/{id}', ['as' => 'admin.funcionario.purge', 'uses' => 'FuncionarioController@purge']);
+        Route::post('/contribuinte', ['as' => 'admin.funcionario.contribuinte', 'uses' => 'FuncionarioController@contribuinte']);
+    });
+    //FUNCIONARIO END
+
 });
