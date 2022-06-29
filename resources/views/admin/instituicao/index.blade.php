@@ -98,7 +98,7 @@
               <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
 
                 <!-- Profile Edit Form -->
-                <form action="{{ route('admin.instituicao.update',$instituicao->id)}}" method="post"  enctype="multipart/form-data" class="row g-3 needs-validation" novalidate>
+                <form action="{{ route('admin.instituicao.update',$instituicao->id)}}" method="post"   class="row g-3 needs-validation" novalidate enctype="multipart/form-data">
                   @method('put')
                   @csrf
                   <div class="row mb-3">

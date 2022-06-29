@@ -1,10 +1,14 @@
   <!-- ======= Header ======= -->
   <header id="header" class="header fixed-top d-flex align-items-center">
-
+    @php
+        $instituicao = \App\Models\Instituicao::get()->first();
+    @endphp
     <div class="d-flex align-items-center justify-content-between">
-      <a href="#" class="logo d-flex align-items-center">
-        <img src="#" alt="">
-        <span class="d-none d-lg-block">SGH</span>
+      <a href="{{route("dash")}}" class="logo d-flex align-items-center">
+        
+        <img src="{{isset($instituicao->logo)?$instituicao->logo:'#'}}" alt="">
+        
+        <span class="d-none d-lg-block">{{isset($instituicao->nomeCurto)?$instituicao->nomeCurto:'SGH'}}</span>
       </a>
       <i class="bi bi-list toggle-sidebar-btn"></i>
     </div><!-- End Logo -->

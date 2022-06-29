@@ -50,7 +50,7 @@ class InstituicaoController extends Controller
             $instituicao = Instituicao::create([
                 'nomeCurto'=>$request->nomeCurto,
                 'nomeLongo' =>$request->nomeLongo,
-                'logo' =>$request->logo,
+                
                 'missao' =>$request->missao,
                 'iban' =>$request->iban,
                 'nif' =>$request->nif,
@@ -78,14 +78,16 @@ class InstituicaoController extends Controller
                    
                 ]);
 
-               
-                   
+                if ($request->hasFile('logo') && $request->file('logo')->isValid()) {
+                    # code...
+                    //dd($request);
+                    $upload = $this->upload_img($request);
                     $instituicao = Instituicao::findOrFail($id);
-                  
+                        //dd($upload);
                         $inst = Instituicao::findOrFail($id)->update([
                             'nomeCurto'=>$request->nomeCurto,
                             'nomeLongo' =>$request->nomeLongo,
-                            'logo' =>$request->logo,
+                            'logo' => $upload ,
                             'missao' =>$request->missao,
                             'iban' =>$request->iban,
                             'nif' =>$request->nif,
@@ -95,8 +97,36 @@ class InstituicaoController extends Controller
                             'email2' =>$request->email2,
                             'endereco' =>$request->endereco,
                         ]);
-                   
+
+                        if (is_dir($instituicao->logo)) {
+                            # code...
+                            unlink($instituicao->logo);
+                        }
+                        return redirect()->back()->with('instituicao.update.success',1);
+                }else {
+                    # code...
+                    $instituicao = Instituicao::findOrFail($id);
+                  
+                    $inst = Instituicao::findOrFail($id)->update([
+                        'nomeCurto'=>$request->nomeCurto,
+                        'nomeLongo' =>$request->nomeLongo,
+                        'logo' =>$request->logo,
+                        'missao' =>$request->missao,
+                        'iban' =>$request->iban,
+                        'nif' =>$request->nif,
+                        'telefone1' =>$request->telefone1,
+                        'telefone2' =>$request->telefone2,
+                        'email1' =>$request->email1,
+                        'email2' =>$request->email2,
+                        'endereco' =>$request->endereco,
+                    ]);
                     return redirect()->back()->with('instituicao.update.success',1);
+                }
+               
+                   
+                    
+                   
+                   
                
                 
             
@@ -127,5 +157,30 @@ class InstituicaoController extends Controller
             //throw $th;
             return redirect()->back()->with('instituicao.purge.error',1);
         }
+    }
+
+    public function upload_img(Request $request){
+
+        # code...
+        $name = uniqid(date('HisYmd'));
+        $image = $request->file('logo');
+        // Recupera a extensão do arquivo
+        $extension = $request->logo->extension();
+        $nameFile = "{$name}.{$extension}";
+        $destinationPath = public_path('/images/instituicao');
+        $image->move($destinationPath, $nameFile);
+        $upload = '/images/instituicao/' . $nameFile;
+
+            // Verifica se NÃO deu certo o upload ( Redireciona de volta )
+            if (!$upload) {
+                return redirect()
+                    ->back()
+                    ->with('error', 'Falha ao fazer upload')
+                    ->withInput();
+            } else {
+
+                return $upload;
+
+            }
     }
 }
