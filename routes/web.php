@@ -49,6 +49,18 @@ Route::middleware([
 
 Route::group(['middleware' => 'auth'], function () {
     
+    //USER START
+    Route::prefix('user')->group(function () {
+
+        Route::get('/create', ['as' => 'admin.user.create', 'uses' => 'UserController@create']);
+        Route::get('/edit/{id}', ['as' => 'admin.user.edit', 'uses' => 'UserController@edit']);
+        Route::post('/store', ['as' => 'admin.user.store', 'uses' => 'UserController@store']);
+        Route::get('/list', ['as' => 'admin.user.list', 'uses' => 'UserController@list']);
+        Route::get('/delete/{id}', ['as' => 'admin.user.delete', 'uses' => 'UserController@delete']);
+        Route::put('/update/{id}', ['as' => 'admin.user.update', 'uses' => 'UserController@update']);
+        Route::get('/purge/{id}', ['as' => 'admin.user.purge', 'uses' => 'UserController@purge']);
+    });
+    //USER END
 
      //DEPARTAMENTO START
      Route::prefix('departamento')->group(function () {

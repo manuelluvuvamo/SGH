@@ -3,7 +3,7 @@
   <div class="row mb-3">
     <label for="logo" class="col-md-4 col-lg-3 col-form-label">Foto</label>
     <div class="col-md-8 col-lg-9">
-      <img src="{{isset($funcionario->foto)?$funcionario->foto:''}}" width="250px"  alt="{{isset($funcionario->nome)?$funcionario->nome:''}}" id="img-perfil">
+      <img src="{{isset($funcionario->foto)?$funcionario->foto:''}}" width="250px"  alt="{{isset($funcionario->name)?$funcionario->name:''}}" id="img-perfil">
       <div class="pt-2">
        
         <label for="foto" class="col-sm-2 col-form-label btn btn-primary btn-sm"><i class="bi bi-upload"></i></label>
@@ -27,12 +27,12 @@
   </div>
 
     <div class="col-md-4">
-      <label for="nome" class="form-label">Nome</label>
-      <input type="text" name="nome" class="form-control @error('nome') is-invalid @enderror" id="nome" value="{{isset($funcionario->nome)?$funcionario->nome:old('nome')}}" required>
+      <label for="name" class="form-label">Nome</label>
+      <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" id="name" value="{{isset($funcionario->name)?$funcionario->name:old('name')}}" required>
       <div class="valid-feedback">
         parece bom!
       </div>
-      @error('nome')
+      @error('name')
             <span class="invalid-feedback" role="alert">
                 <strong>{{ $message }}</strong>
             </span>
@@ -46,12 +46,12 @@
       <select class="form-select @error('idFuncao') is-invalid @enderror" id="idFuncao"  name="idFuncao" value="old('idFuncao')" required>
       
         <option value="{{ isset($funcionario) ? $funcionario->idFuncao : '0' }}" selected>
-          {{ isset($funcionario) ? $funcionario->nome_funcao : 'Seleccionar função' }}
+          {{ isset($funcionario) ? $funcionario->name_funcao : 'Seleccionar função' }}
       </option>
         
         @isset($funcaos)
         @foreach ($funcaos as $funcao)
-        <option value="{{$funcao->id}}">{{$funcao->nome}}</option>
+        <option value="{{$funcao->id}}">{{$funcao->name}}</option>
         @endforeach
             
         @endisset

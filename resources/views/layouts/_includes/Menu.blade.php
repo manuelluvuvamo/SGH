@@ -6,7 +6,7 @@
     <div class="d-flex align-items-center justify-content-between">
       <a href="{{route("dash")}}" class="logo d-flex align-items-center">
         
-        <img src="{{isset($instituicao->logo)?$instituicao->logo:'#'}}" alt="">
+        <img src="{{isset($instituicao->logo)?$instituicao->logo:'#'}}"  alt="">
         
         <span class="d-none d-lg-block">{{isset($instituicao->nomeCurto)?$instituicao->nomeCurto:'SGH'}}</span>
       </a>
@@ -250,6 +250,14 @@
       </li><!-- End Dashboard Nav -->
 
      
+      <li class="nav-heading">Configurações</li>
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="{{route('admin.user.list')}}">
+          <i class="bi bi-person  "></i>
+          <span>Utilizadores</span>
+        </a>
+      </li><!-- End Instituição Page Nav -->
 
       <li class="nav-heading">Recursos Humanos</li>
 
@@ -258,7 +266,7 @@
           <i class="bi bi-building"></i>
           <span>Instituição</span>
         </a>
-      </li><!-- End Departamentos Page Nav -->
+      </li><!-- End Instituição Page Nav -->
 
       <li class="nav-item">
         <a class="nav-link collapsed" href="{{route('admin.departamento.list')}}">

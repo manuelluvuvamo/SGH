@@ -8,6 +8,7 @@ use App\Models\Funcao;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Funcionario;
+use Illuminate\Support\Facades\Http;
 
 class FuncionarioController extends Controller
 {
@@ -61,7 +62,7 @@ class FuncionarioController extends Controller
 
     //  try {
         $validator=$request->validate([
-            'nome' => ['required', 'string', 'max:32'], 
+            'name' => ['required', 'string', 'max:32'], 
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'idFuncao' => ['required'],       
            
@@ -74,7 +75,7 @@ class FuncionarioController extends Controller
             $funcao = Funcao::find($request->idFuncao);
             $upload = $this->upload_img($request);
             $user = User::create([
-                'name' => $request->nome,
+                'name' => $request->name,
                 'email' => $request->email,
                 'tipo_conta' =>  $funcao->nome,
                 'password' => Hash::make("12345678"),
@@ -110,7 +111,7 @@ class FuncionarioController extends Controller
             # code...
             $funcao = Funcao::find($request->idFuncao);
             $user = User::create([
-                'name' => $request->nome,
+                'name' => $request->name,
                 'email' => $request->email,
                 'tipo_conta' =>  $funcao->nome,
                 'password' => Hash::make("12345678"),
@@ -143,12 +144,12 @@ class FuncionarioController extends Controller
       
             
 
-            if ($funcionario) {
+            /* if ($funcionario) {
                 return redirect()->back()->with('funcionario.create.success',1);
                
             }else{
                 return redirect()->back()->with('funcionario.create.error',1);
-            }
+            } */
         
         
     //  } catch (\Throwable $th) {

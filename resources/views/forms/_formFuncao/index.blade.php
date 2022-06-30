@@ -17,7 +17,7 @@
 
    
 
-    <div class="col-md-6">
+    <div class="col-md-4">
       <label for="id_departamento" class="form-label">Departamento</label>
       <select class="form-select @error('id_departamento') is-invalid @enderror" id="id_departamento"  name="id_departamento" value="old('id_departamento')" required>
       
