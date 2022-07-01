@@ -2,6 +2,7 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
   @php
   $instituicao = \App\Models\Instituicao::get()->first();
+  //dd( $instituicao);
 @endphp
 <head>
     <meta charset="utf-8">
