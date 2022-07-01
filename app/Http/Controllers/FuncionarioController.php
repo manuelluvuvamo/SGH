@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Experiencia;
+use App\Models\Formacao;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
@@ -89,7 +90,7 @@ class FuncionarioController extends Controller
                    
                     'idUser'=>$user->id,
                     'idFuncao'=>$request->idFuncao,
-                    'nome'=>$request->nome,
+                    'nome'=>$request->name,
                     'foto'=>$upload,
                     'genero'=>$request->genero,
                     'dataNascimento'=>$request->dataNascimento,
@@ -125,7 +126,7 @@ class FuncionarioController extends Controller
                    
                     'idUser'=>$user->id,
                     'idFuncao'=>$request->idFuncao,
-                    'nome'=>$request->nome,
+                    'nome'=>$request->name,
                     'genero'=>$request->genero,
                     'dataNascimento'=>$request->dataNascimento,
                     'estadoCivil'=>$request->estadoCivil,
@@ -185,7 +186,7 @@ class FuncionarioController extends Controller
                                
                                 
                                 'idFuncao'=>$request->idFuncao,
-                                'nome'=>$request->nome,
+                                'nome'=>$request->name,
                                 'foto'=>$upload,
                                 'genero'=>$request->genero,
                                 'dataNascimento'=>$request->dataNascimento,
@@ -215,7 +216,7 @@ class FuncionarioController extends Controller
                                
                                 
                                 'idFuncao'=>$request->idFuncao,
-                                'nome'=>$request->nome,
+                                'nome'=>$request->name,
                                 'genero'=>$request->genero,
                                 'dataNascimento'=>$request->dataNascimento,
                                 'estadoCivil'=>$request->estadoCivil,
@@ -316,9 +317,29 @@ class FuncionarioController extends Controller
            
         )->where('funcionarios.id',$id)->get()->first();
 
-        $dados["experiencias"] = Experiencia::where("idFuncionario",$id);
+        $dados["experiencias"] = Experiencia::where("idFuncionario",$id)->get();
+        $dados["formacaos"] = Formacao::where("idFuncionario",$id)->get();
+
+        
 
         return view("admin.funcionario.ver",$dados);
     }
 
+    public function addExperiencia($id){
+        
+        $data['page'] = "criar";
+        $data['func'] = 1;
+        $data['funcionarios'] = Funcionario::where("id",$id)->get();
+       
+        return view('admin.experiencia.index',$data);
+    }
+
+    public function addFormacao($id){
+        
+        $data['page'] = "criar";
+        $data['func'] = 1;
+        $data['funcionarios'] = Funcionario::where("id",$id)->get();
+       
+        return view('admin.formacao.index',$data);
+    }
 }

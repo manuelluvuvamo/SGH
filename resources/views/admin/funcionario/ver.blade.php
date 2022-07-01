@@ -9,7 +9,7 @@
         <div class="card">
           <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
 
-            <img src="{{isset($funcionario->foto)?$funcionario->foto:''}}" alt="#" class="rounded-circle">
+            <img src="{{isset($funcionario->foto)?$funcionario->foto:''}}" alt="#" class="img-thumbnail">
             <h2>{{ $funcionario->nome }}</h2>
             <h3>{{ $funcionario->nome_funcao }}</h3>
             {{-- <div class="social-links mt-2">
@@ -113,30 +113,32 @@
                 @if (isset($experiencias))
  
                    @foreach ($experiencias as $experiencia)
-                       <div class="row">
-                         <div class="col-lg-3 col-md-4 label ">Instituição</div>
-                         <div class="col-lg-9 col-md-8">{{ $experiencias->instituicao }}</div>
-                       </div>
-                       <div class="row">
-                         <div class="col-lg-3 col-md-4 label ">Cargo</div>
-                         <div class="col-lg-9 col-md-8">{{ $experiencias->cargo }}</div>
-                       </div>
-                       <div class="row">
-                         <div class="col-lg-3 col-md-4 label ">Data de inicio</div>
-                         <div class="col-lg-9 col-md-8">{{ $experiencias->dataInicio }}</div>
-                       </div>
-                       <div class="row">
-                         <div class="col-lg-3 col-md-4 label ">Data de término</div>
-                         <div class="col-lg-9 col-md-8">{{ $experiencias->dataFim }}</div>
-                       </div>
-                       <div class="row">
-                         <div class="col-lg-3 col-md-4 label ">Telefone</div>
-                         <div class="col-lg-9 col-md-8">{{ $experiencias->telefone }}</div>
-                       </div>
-                       <div class="row">
-                         <div class="col-lg-3 col-md-4 label ">Telefone</div>
-                         <div class="col-lg-9 col-md-8">{{ $experiencias->telefone }}</div>
-                       </div>
+                       
+                    <div class="row mt-3">
+                        <p>Experiência nº {{$experiencia->id}}</p>
+                        <hr>
+                      <div class="row">
+                        <div class="col-lg-3 col-md-4 label ">Instituição</div>
+                        <div class="col-lg-9 col-md-8">{{ $experiencia->instituicao }}</div>
+                      </div>
+                      <div class="row">
+                        <div class="col-lg-3 col-md-4 label ">Cargo</div>
+                        <div class="col-lg-9 col-md-8">{{ $experiencia->cargo }}</div>
+                      </div>
+                      <div class="row">
+                       <div class="col-lg-3 col-md-4 label ">Função</div>
+                       <div class="col-lg-9 col-md-8">{{ $experiencia->funcao }}</div>
+                     </div>
+                      <div class="row">
+                        <div class="col-lg-3 col-md-4 label ">Data de inicio</div>
+                        <div class="col-lg-9 col-md-8">{{ $experiencia->dataInicio }}</div>
+                      </div>
+                      <div class="row">
+                        <div class="col-lg-3 col-md-4 label ">Data de término</div>
+                        <div class="col-lg-9 col-md-8">{{ $experiencia->dataFim }}</div>
+                      </div>
+                    </div>
+                     
                    @endforeach
                     
                 @endif

@@ -7,27 +7,27 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
-use App\Models\Experiencia;
+use App\Models\formacao;
 use App\Models\Funcionario;
 use Illuminate\Support\Facades\Auth;
 
-class ExperienciaController extends Controller
+class FormacaoController extends Controller
 {
     //
-
+    
     public function list(){
 
-        $data['experiencias'] = Experiencia::join('funcionarios', 'experiencias.idFuncionario', 'funcionarios.id')
+        $data['formacaos'] = Formacao::join('funcionarios', 'formacaos.idFuncionario', 'funcionarios.id')
 
         ->select(
-            'experiencias.*',
+            'formacaos.*',
             'funcionarios.nome  as nome_funcionario',
            
         )
         ->orderBy('funcionarios.nome')
         ->get();
         $data['page'] = "lista";
-        return view('admin.experiencia.index',$data);
+        return view('admin.formacao.index',$data);
     }
 
 
@@ -36,27 +36,27 @@ class ExperienciaController extends Controller
         $data['page'] = "criar";
         $data['funcionarios'] = Funcionario::all();
        
-        return view('admin.experiencia.index',$data);
+        return view('admin.formacao.index',$data);
     }
     
     public function edit($id){
 
         $data['page'] = "editar";
-        $data['experiencia'] = Experiencia::join('funcionarios', 'experiencias.idFuncionario', 'funcionarios.id')
+        $data['formacao'] = Formacao::join('funcionarios', 'formacaos.idFuncionario', 'funcionarios.id')
 
         ->select(
-            'experiencias.*',
+            'formacaos.*',
             'funcionarios.nome as nome_funcionario',
            
         )
-        ->where('experiencias.id',$id)
+        ->where('formacaos.id',$id)
         ->get()->first();
-        $data['id'] =  $data['experiencia']->id;
+        $data['id'] =  $data['formacao']->id;
 
 
         $data['funcionarios'] = Funcionario::all();
        
-        return view('admin.experiencia.index',$data);
+        return view('admin.formacao.index',$data);
     }
       
    
@@ -67,28 +67,28 @@ class ExperienciaController extends Controller
        
          
       
-            $experiencia = Experiencia::create([
+            $formacao = Formacao::create([
                
                 'idFuncionario' => $request->idFuncionario,
                 'instituicao' => $request->instituicao,
-                'cargo' => $request->cargo,
-                'funcao' => $request->funcao,
+                'curso' => $request->curso,
+                'nivel' => $request->nivel,
                 'dataInicio' => $request->dataInicio,
                 'dataFim' => $request->dataFim,
                 
             ]);
 
-            if ($experiencia) {
+            if ($formacao) {
               
-                return redirect()->back()->with('experiencia.create.success',1);
+                return redirect()->back()->with('formacao.create.success',1);
             }else{
-                return redirect()->back()->with('experiencia.create.error',1);
+                return redirect()->back()->with('formacao.create.error',1);
             }
         
         
      } catch (\Throwable $th) {
          //throw $th;
-         return redirect()->back()->with('experiencia.create.error',1);
+         return redirect()->back()->with('formacao.create.error',1);
      }
     }
     public function update(Request $request,$id ){
@@ -98,17 +98,18 @@ class ExperienciaController extends Controller
            
 
                     # code...
-                    $experiencia = Experiencia::findOrFail($id);
+                    $formacao = Formacao::findOrFail($id);
                     
  
                      
-                     $exp = Experiencia::findOrFail($id)->update([
+                     $exp = Formacao::findOrFail($id)->update([
+                                               
                         'idFuncionario' => $request->idFuncionario,
                         'instituicao' => $request->instituicao,
-                        'cargo' => $request->cargo,
-                        'funcao' => $request->funcao,
+                        'curso' => $request->curso,
+                        'nivel' => $request->nivel,
                         'dataInicio' => $request->dataInicio,
-                        'dataFim' => $request->dataFim,   
+                        'dataFim' => $request->dataFim,
                         
                     ]);
     
@@ -116,9 +117,9 @@ class ExperienciaController extends Controller
                         # code...
                         
                            
-                            return redirect()->back()->with('experiencia.update.success',1);
+                            return redirect()->back()->with('formacao.update.success',1);
                         }else{
-                            return redirect()->back()->with('experiencia.update.error',1);
+                            return redirect()->back()->with('formacao.update.error',1);
                         }
                    
                 
@@ -126,34 +127,34 @@ class ExperienciaController extends Controller
             
         } catch (\Throwable $th) {
                 //throw $th;
-            return redirect()->back()->with('experiencia.update.error',1);
+            return redirect()->back()->with('formacao.update.error',1);
         }
     }
 
     public function delete($id){
         try {
             
-            $experiencia = Experiencia::findOrFail($id);
-            Experiencia::findOrFail($id)->delete();
-        return redirect()->back()->with('experiencia.delete.success',1);
+            $formacao = Formacao::findOrFail($id);
+            Formacao::findOrFail($id)->delete();
+        return redirect()->back()->with('formacao.delete.success',1);
         } catch (\Throwable $th) {
             //throw $th;
-            return redirect()->back()->with('experiencia.delete.error',1);
+            return redirect()->back()->with('formacao.delete.error',1);
         }
     }
     public function purge($id){
         try {
             
-            $experiencia = Experiencia::findOrFail($id);
-            Experiencia::findOrFail($id)->forceDelete();
-            if (is_dir($experiencia->path)) {
+            $formacao = Formacao::findOrFail($id);
+            Formacao::findOrFail($id)->forceDelete();
+            if (is_dir($formacao->path)) {
                 # code...
-                unlink($experiencia->path);
+                unlink($formacao->path);
             }
-        return redirect()->back()->with('experiencia.purge.success',1);
+        return redirect()->back()->with('formacao.purge.success',1);
         } catch (\Throwable $th) {
             //throw $th;
-            return redirect()->back()->with('experiencia.purge.error',1);
+            return redirect()->back()->with('formacao.purge.error',1);
         }
     }
 }

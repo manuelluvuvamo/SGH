@@ -114,6 +114,9 @@ Route::group(['middleware' => 'auth'], function () {
         Route::put('/update/{id}', ['as' => 'admin.funcionario.update', 'uses' => 'FuncionarioController@update']);
         Route::get('/purge/{id}', ['as' => 'admin.funcionario.purge', 'uses' => 'FuncionarioController@purge']);
         Route::get('/ver/{id}', ['as' => 'admin.funcionario.ver', 'uses' => 'FuncionarioController@ver']);
+        Route::get('/add/{id}/experiencia', ['as' => 'admin.funcionario.addExperiencia', 'uses' => 'FuncionarioController@addExperiencia']);
+        Route::get('/add/{id}/formacao', ['as' => 'admin.funcionario.addFormacao', 'uses' => 'FuncionarioController@addFormacao']);
+
         Route::post('/contribuinte', ['as' => 'admin.funcionario.contribuinte', 'uses' => 'FuncionarioController@contribuinte']);
         
     });
@@ -123,11 +126,30 @@ Route::group(['middleware' => 'auth'], function () {
     Route::prefix('experiencia')->group(function () {
 
    
+        Route::get('/create', ['as' => 'admin.experiencia.create', 'uses' => 'ExperienciaController@create']);
+        Route::get('/edit/{id}', ['as' => 'admin.experiencia.edit', 'uses' => 'ExperienciaController@edit']);
+        Route::post('/store', ['as' => 'admin.experiencia.store', 'uses' => 'ExperienciaController@store']);
+        Route::get('/list', ['as' => 'admin.experiencia.list', 'uses' => 'ExperienciaController@list']);
+        Route::get('/delete/{id}', ['as' => 'admin.experiencia.delete', 'uses' => 'ExperienciaController@delete']);
         Route::put('/update/{id}', ['as' => 'admin.experiencia.update', 'uses' => 'ExperienciaController@update']);
-        
-
-        
+        Route::get('/purge/{id}', ['as' => 'admin.experiencia.purge', 'uses' => 'ExperienciaController@purge']);
     });
+    
     //EXPERIENCIA END
+
+     //FORMACAO START
+     Route::prefix('formacao')->group(function () {
+
+   
+        Route::get('/create', ['as' => 'admin.formacao.create', 'uses' => 'FormacaoController@create']);
+        Route::get('/edit/{id}', ['as' => 'admin.formacao.edit', 'uses' => 'FormacaoController@edit']);
+        Route::post('/store', ['as' => 'admin.formacao.store', 'uses' => 'FormacaoController@store']);
+        Route::get('/list', ['as' => 'admin.formacao.list', 'uses' => 'FormacaoController@list']);
+        Route::get('/delete/{id}', ['as' => 'admin.formacao.delete', 'uses' => 'FormacaoController@delete']);
+        Route::put('/update/{id}', ['as' => 'admin.formacao.update', 'uses' => 'FormacaoController@update']);
+        Route::get('/purge/{id}', ['as' => 'admin.formacao.purge', 'uses' => 'FormacaoController@purge']);
+    });
+    
+    //FORMACAO END
 
 });
