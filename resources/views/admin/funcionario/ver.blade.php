@@ -37,6 +37,12 @@
               <li class="nav-item">
                 <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-edit">Experiência</button>
               </li>
+              <li class="nav-item">
+                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#formacao">Formação</button>
+              </li>
+              <li class="nav-item">
+                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#admissao">Admissão</button>
+              </li>
 
              
 
@@ -136,6 +142,86 @@
                       <div class="row">
                         <div class="col-lg-3 col-md-4 label ">Data de término</div>
                         <div class="col-lg-9 col-md-8">{{ $experiencia->dataFim }}</div>
+                      </div>
+                    </div>
+                     
+                   @endforeach
+                    
+                @endif
+
+              </div>
+
+
+              <div class="tab-pane fade profile-edit pt-3" id="formacao">
+
+                <h5 class="card-title">Formação</h5>
+                @if (isset($formacaos))
+ 
+                   @foreach ($formacaos as $formacao)
+                       
+                    <div class="row mt-3">
+                        <p>Formação nº {{$formacao->id}}</p>
+                        <hr>
+                      <div class="row">
+                        <div class="col-lg-3 col-md-4 label ">Instituição</div>
+                        <div class="col-lg-9 col-md-8">{{ $formacao->instituicao }}</div>
+                      </div>
+                      <div class="row">
+                        <div class="col-lg-3 col-md-4 label ">Curso</div>
+                        <div class="col-lg-9 col-md-8">{{ $formacao->curso }}</div>
+                      </div>
+                      <div class="row">
+                       <div class="col-lg-3 col-md-4 label ">Nível</div>
+                       <div class="col-lg-9 col-md-8">{{ $formacao->nivel }}</div>
+                     </div>
+                      <div class="row">
+                        <div class="col-lg-3 col-md-4 label ">Data de inicio</div>
+                        <div class="col-lg-9 col-md-8">{{ $formacao->dataInicio }}</div>
+                      </div>
+                      <div class="row">
+                        <div class="col-lg-3 col-md-4 label ">Data de término</div>
+                        <div class="col-lg-9 col-md-8">{{ $formacao->dataFim }}</div>
+                      </div>
+                    </div>
+                     
+                   @endforeach
+                    
+                @endif
+
+              </div>
+
+              
+              <div class="tab-pane fade profile-edit pt-3" id="admissao">
+
+                <h5 class="card-title">Admissão</h5>
+                @if (isset($admissaos))
+ 
+                   @foreach ($admissaos as $admissao)
+                       
+                    <div class="row mt-3">
+                        <p>Admissão nº {{$admissao->id}}</p>
+                        <hr>
+                       
+                       
+                      <div class="row">
+                        <div class="col-lg-3 col-md-4 label ">Data de admissão</div>
+                        <div class="col-lg-9 col-md-8">{{ $admissao->dataAdmissao }}</div>
+                      </div>
+                      <div class="row">
+                        <div class="col-lg-3 col-md-4 label ">Cargo inicial</div>
+                        <div class="col-lg-9 col-md-8">{{ $admissao->cargoInicial }}</div>
+                      </div>
+                      <div class="row">
+                       <div class="col-lg-3 col-md-4 label ">Salário inicial</div>
+                       <div class="col-lg-9 col-md-8">{{ number_format($admissao->salarioInicia, 2, ",", ".") }}</div>
+                     </div>
+                      <div class="row">
+                        <div class="col-lg-3 col-md-4 label ">Nº de dependente</div>
+                        <div class="col-lg-9 col-md-8">{{ $admissao->numDependentes }}</div>
+                      </div>
+                      <div class="row">
+                        <div class="col-lg-3 col-md-4 label ">Nº de registro</div>
+                        <div class="col-lg-9 col-md-8">{{ $admissao->numRegistro }}</div>
                       </div>
                     </div>
                      

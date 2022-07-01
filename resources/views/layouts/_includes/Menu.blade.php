@@ -305,6 +305,11 @@
               <i class="bi bi-circle"></i><span>Formação</span>
             </a>
           </li>
+          <li>
+            <a href="{{route('admin.admissao.list')}}">
+              <i class="bi bi-circle"></i><span>Admissão</span>
+            </a>
+          </li>
          
         </ul>
       </li><!-- End Dados do funcionário Nav -->

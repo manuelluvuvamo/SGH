@@ -116,6 +116,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/ver/{id}', ['as' => 'admin.funcionario.ver', 'uses' => 'FuncionarioController@ver']);
         Route::get('/add/{id}/experiencia', ['as' => 'admin.funcionario.addExperiencia', 'uses' => 'FuncionarioController@addExperiencia']);
         Route::get('/add/{id}/formacao', ['as' => 'admin.funcionario.addFormacao', 'uses' => 'FuncionarioController@addFormacao']);
+        Route::get('/add/{id}/admissao', ['as' => 'admin.funcionario.addAdmissao', 'uses' => 'FuncionarioController@addAdmissao']);
 
         Route::post('/contribuinte', ['as' => 'admin.funcionario.contribuinte', 'uses' => 'FuncionarioController@contribuinte']);
         
@@ -151,5 +152,20 @@ Route::group(['middleware' => 'auth'], function () {
     });
     
     //FORMACAO END
+
+     //DMISSAO START
+     Route::prefix('admissao')->group(function () {
+
+   
+        Route::get('/create', ['as' => 'admin.admissao.create', 'uses' => 'AdmissaoController@create']);
+        Route::get('/edit/{id}', ['as' => 'admin.admissao.edit', 'uses' => 'AdmissaoController@edit']);
+        Route::post('/store', ['as' => 'admin.admissao.store', 'uses' => 'AdmissaoController@store']);
+        Route::get('/list', ['as' => 'admin.admissao.list', 'uses' => 'AdmissaoController@list']);
+        Route::get('/delete/{id}', ['as' => 'admin.admissao.delete', 'uses' => 'AdmissaoController@delete']);
+        Route::put('/update/{id}', ['as' => 'admin.admissao.update', 'uses' => 'AdmissaoController@update']);
+        Route::get('/purge/{id}', ['as' => 'admin.admissao.purge', 'uses' => 'AdmissaoController@purge']);
+    });
+    
+    //ADMISSAO END
 
 });

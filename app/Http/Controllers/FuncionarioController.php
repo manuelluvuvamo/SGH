@@ -342,4 +342,13 @@ class FuncionarioController extends Controller
        
         return view('admin.formacao.index',$data);
     }
+
+    public function addAdmissao($id){
+        
+        $data['page'] = "criar";
+        $data['func'] = 1;
+        $data['funcionarios'] = Funcionario::where("id",$id)->get();
+       
+        return view('admin.admissao.index',$data);
+    }
 }
