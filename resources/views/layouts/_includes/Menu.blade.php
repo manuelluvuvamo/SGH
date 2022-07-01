@@ -1,10 +1,14 @@
   <!-- ======= Header ======= -->
   <header id="header" class="header fixed-top d-flex align-items-center">
-
+    @php
+        $instituicao = \App\Models\Instituicao::get()->first();
+    @endphp
     <div class="d-flex align-items-center justify-content-between">
-      <a href="#" class="logo d-flex align-items-center">
-        <img src="#" alt="">
-        <span class="d-none d-lg-block">SGH</span>
+      <a href="{{route("dash")}}" class="logo d-flex align-items-center">
+        
+        <img src="{{isset($instituicao->logo)?$instituicao->logo:'#'}}"  alt="">
+        
+        <span class="d-none d-lg-block">{{isset($instituicao->nomeCurto)?$instituicao->nomeCurto:'SGH'}}</span>
       </a>
       <i class="bi bi-list toggle-sidebar-btn"></i>
     </div><!-- End Logo -->
@@ -203,7 +207,7 @@
             </li>
 
             <li>
-              <a class="dropdown-item d-flex align-items-center" href="pages-faq.html">
+              <a class="dropdown-item d-flex align-items-center" href="#">
                 <i class="bi bi-question-circle"></i>
                 <span>Precisa de ajuda?</span>
               </a>
@@ -246,10 +250,23 @@
       </li><!-- End Dashboard Nav -->
 
      
+      <li class="nav-heading">Configurações</li>
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="{{route('admin.user.list')}}">
+          <i class="bi bi-person  "></i>
+          <span>Utilizadores</span>
+        </a>
+      </li><!-- End Instituição Page Nav -->
 
       <li class="nav-heading">Recursos Humanos</li>
 
-     
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="{{route('admin.instituicao.list')}}">
+          <i class="bi bi-building"></i>
+          <span>Instituição</span>
+        </a>
+      </li><!-- End Instituição Page Nav -->
 
       <li class="nav-item">
         <a class="nav-link collapsed" href="{{route('admin.departamento.list')}}">
@@ -260,10 +277,17 @@
 
       <li class="nav-item">
         <a class="nav-link collapsed" href="{{route('admin.funcao.list')}}">
-          <i class="bi bi-door-closed"></i>
+          <i class="bi bi-briefcase"></i>
           <span>Funções</span>
         </a>
       </li><!-- End User Page Nav -->
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="{{route('admin.funcionario.list')}}">
+          <i class="bi bi-file-person"></i>
+          <span>Funcionários</span>
+        </a>
+      </li><!-- End Funcionários Page Nav -->
 
       
 

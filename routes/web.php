@@ -49,6 +49,20 @@ Route::middleware([
 
 Route::group(['middleware' => 'auth'], function () {
     
+    //USER START
+    Route::prefix('user')->group(function () {
+
+        Route::get('/create', ['as' => 'admin.user.create', 'uses' => 'UserController@create']);
+        Route::get('/edit/{id}', ['as' => 'admin.user.edit', 'uses' => 'UserController@edit']);
+        Route::post('/store', ['as' => 'admin.user.store', 'uses' => 'UserController@store']);
+        Route::get('/list', ['as' => 'admin.user.list', 'uses' => 'UserController@list']);
+        Route::get('/delete/{id}', ['as' => 'admin.user.delete', 'uses' => 'UserController@delete']);
+        Route::put('/update/{id}', ['as' => 'admin.user.update', 'uses' => 'UserController@update']);
+        Route::get('/purge/{id}', ['as' => 'admin.user.purge', 'uses' => 'UserController@purge']);
+        Route::put('/update/{id}/profile', ['as' => 'admin.user.update.profile', 'uses' => 'UserController@updateProfile']);
+        Route::put('/update/{id}/pass', ['as' => 'admin.user.update.pass', 'uses' => 'UserController@updatePass']);
+    });
+    //USER END
 
      //DEPARTAMENTO START
      Route::prefix('departamento')->group(function () {
@@ -63,6 +77,19 @@ Route::group(['middleware' => 'auth'], function () {
     });
     //DEPARTAMENTO END
 
+     //INSTITUICAO START
+     Route::prefix('instituicao')->group(function () {
+
+        Route::get('/create', ['as' => 'admin.instituicao.create', 'uses' => 'InstituicaoController@create']);
+        Route::get('/edit/{id}', ['as' => 'admin.instituicao.edit', 'uses' => 'InstituicaoController@edit']);
+        Route::post('/store', ['as' => 'admin.instituicao.store', 'uses' => 'InstituicaoController@store']);
+        Route::get('/list', ['as' => 'admin.instituicao.list', 'uses' => 'InstituicaoController@list']);
+        Route::get('/delete/{id}', ['as' => 'admin.instituicao.delete', 'uses' => 'InstituicaoController@delete']);
+        Route::put('/update/{id}', ['as' => 'admin.instituicao.update', 'uses' => 'InstituicaoController@update']);
+        Route::get('/purge/{id}', ['as' => 'admin.instituicao.purge', 'uses' => 'InstituicaoController@purge']);
+    });
+    //INSTITUICAO END
+
     //FUNÇÃO START
     Route::prefix('funcao')->group(function () {
 
@@ -75,5 +102,32 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/purge/{id}', ['as' => 'admin.funcao.purge', 'uses' => 'FuncaoController@purge']);
     });
     //FUNÇÃO END
+
+    //FUNCIONARIO START
+    Route::prefix('funcionario')->group(function () {
+
+        Route::get('/create', ['as' => 'admin.funcionario.create', 'uses' => 'FuncionarioController@create']);
+        Route::get('/edit/{id}', ['as' => 'admin.funcionario.edit', 'uses' => 'FuncionarioController@edit']);
+        Route::post('/store', ['as' => 'admin.funcionario.store', 'uses' => 'FuncionarioController@store']);
+        Route::get('/list', ['as' => 'admin.funcionario.list', 'uses' => 'FuncionarioController@list']);
+        Route::get('/delete/{id}', ['as' => 'admin.funcionario.delete', 'uses' => 'FuncionarioController@delete']);
+        Route::put('/update/{id}', ['as' => 'admin.funcionario.update', 'uses' => 'FuncionarioController@update']);
+        Route::get('/purge/{id}', ['as' => 'admin.funcionario.purge', 'uses' => 'FuncionarioController@purge']);
+        Route::get('/ver/{id}', ['as' => 'admin.funcionario.ver', 'uses' => 'FuncionarioController@ver']);
+        Route::post('/contribuinte', ['as' => 'admin.funcionario.contribuinte', 'uses' => 'FuncionarioController@contribuinte']);
+        
+    });
+    //FUNCIONARIO END
+
+    //EXPERIENCIA START
+    Route::prefix('experiencia')->group(function () {
+
+   
+        Route::put('/update/{id}', ['as' => 'admin.experiencia.update', 'uses' => 'ExperienciaController@update']);
+        
+
+        
+    });
+    //EXPERIENCIA END
 
 });

@@ -31,6 +31,7 @@ class User extends Authenticatable
         'tipo_conta',
         'status',
         'password',
+        'profile_photo_path',
     ];
     protected $dates=['deleted_at'];
 

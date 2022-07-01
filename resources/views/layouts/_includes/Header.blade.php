@@ -1,6 +1,8 @@
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-
+  @php
+  $instituicao = \App\Models\Instituicao::get()->first();
+@endphp
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -13,11 +15,11 @@
     <link rel="icon" href="{{asset('/images/insignia/logo.png')}}">
 
     <title>@yield('titulo')</title>
-
+ 
 
     <!-- Favicons -->
-  <link href="{{asset('/dashboard/img/favicon.png')}}" rel="icon">
-  <link href="{{asset('/dashboard/img/apple-touch-icon.png')}}" rel="apple-touch-icon">
+  <link href="{{isset($instituicao->logo)?$instituicao->logo:'/dashboard/img/favicon.png'}}" rel="icon">
+  <link href="{{isset($instituicao->logo)?$instituicao->logo:'/dashboard/img/apple-touch-icon.png'}}" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
   <link href="https://fonts.gstatic.com" rel="preconnect">

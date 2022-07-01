@@ -13,7 +13,7 @@
   </footer><!-- End Footer -->
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
-  <script>
+  {{-- <script>
     $(document).ready(function() {
 
         //start delete
@@ -34,8 +34,8 @@
         //end delete
     });
 
-</script>
-<script>
+</script> --}}
+{{-- <script>
   $(document).ready(function() {
       //start delete
       $('a[data-confirm]').click(function(ev) {
@@ -53,7 +53,7 @@
       });
       //end delete
   });
-</script>
+</script> --}}
   <!-- Vendor JS Files -->
   <script src="{{ asset('/dashboard/js/select2.min.js') }}"></script>
   <script src="{{asset('/dashboard/vendor/apexcharts/apexcharts.min.js')}}"></script>
@@ -65,6 +65,7 @@
   <script src="{{asset('/dashboard/vendor/tinymce/tinymce.min.js')}}"></script>
   <script src="{{asset('/dashboard/vendor/php-email-form/validate.js')}}"></script>
   <script src="{{asset('/dashboard/js/sweetalert2.all.min.js')}}"></script>
+  <script src="{{ asset('/dashboard/js/jquery.min.js') }}"></script>
 
   <!-- Template Main JS File -->
   <script src="{{asset('/dashboard/js/main.js')}}"></script>
