@@ -260,7 +260,7 @@
 
       <li class="nav-item">
         <a class="nav-link collapsed" href="{{route('admin.funcao.list')}}">
-          <i class="bi bi-folder2"></i>
+          <i class="bi bi-door-closed"></i>
           <span>Funções</span>
         </a>
       </li><!-- End User Page Nav -->
