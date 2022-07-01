@@ -59,6 +59,8 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/delete/{id}', ['as' => 'admin.user.delete', 'uses' => 'UserController@delete']);
         Route::put('/update/{id}', ['as' => 'admin.user.update', 'uses' => 'UserController@update']);
         Route::get('/purge/{id}', ['as' => 'admin.user.purge', 'uses' => 'UserController@purge']);
+        Route::put('/update/{id}/profile', ['as' => 'admin.user.update.profile', 'uses' => 'UserController@updateProfile']);
+        Route::put('/update/{id}/pass', ['as' => 'admin.user.update.pass', 'uses' => 'UserController@updatePass']);
     });
     //USER END
 
@@ -111,8 +113,21 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/delete/{id}', ['as' => 'admin.funcionario.delete', 'uses' => 'FuncionarioController@delete']);
         Route::put('/update/{id}', ['as' => 'admin.funcionario.update', 'uses' => 'FuncionarioController@update']);
         Route::get('/purge/{id}', ['as' => 'admin.funcionario.purge', 'uses' => 'FuncionarioController@purge']);
+        Route::get('/ver/{id}', ['as' => 'admin.funcionario.ver', 'uses' => 'FuncionarioController@ver']);
         Route::post('/contribuinte', ['as' => 'admin.funcionario.contribuinte', 'uses' => 'FuncionarioController@contribuinte']);
+        
     });
     //FUNCIONARIO END
+
+    //EXPERIENCIA START
+    Route::prefix('experiencia')->group(function () {
+
+   
+        Route::put('/update/{id}', ['as' => 'admin.experiencia.update', 'uses' => 'ExperienciaController@update']);
+        
+
+        
+    });
+    //EXPERIENCIA END
 
 });

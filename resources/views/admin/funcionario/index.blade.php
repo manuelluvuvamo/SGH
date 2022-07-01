@@ -65,8 +65,7 @@
                                     <td>{{$funcionario->localNascimento}}</td>
                                     <td>{{$funcionario->nacionalidade}}</td>
                                     <td>{{$funcionario->numBi}}</td>
-                                    <td>{{$funcionario->filPai}}</td>
-                                    <td>{{$funcionario->filMae}}</td>
+                                   
                                     <td>{{$funcionario->iban}}</td>
                                     <td>{{$funcionario->endereco}}</td>
                                     <td>{{$funcionario->telefone}}</td>
@@ -110,6 +109,15 @@
                                                   </a>
                                                  
                                             </li>
+                                            <li class="message-item">
+                                             
+                                              <a href="{{ route('admin.funcionario.ver', $funcionario->id) }}"
+                                                 class="dropdown-item">
+                                               <img src="assets/img/messages-2.jpg" alt="" class="rounded-circle">
+                                               Visualizar
+                                             </a>
+                                            
+                                       </li>
 
                                             <li>
                                               <hr class="dropdown-divider">

@@ -2,23 +2,6 @@
 @section('titulo', 'Perfil')
 @section('conteudo')
 
-@php
-    $user = \App\Models\User::join('personal_datas', 'users.id_data', 'personal_datas.id')
-
-            ->select(
-                'users.*',
-                'personal_datas.nif',
-                'personal_datas.first_name',
-                'personal_datas.last_name',
-                "personal_datas.country",
-                "personal_datas.city",
-                "personal_datas.street",
-                "personal_datas.desc"
-            )
-            ->where('users.id', Auth::user()->id)
-            ->get()->first();
-
-@endphp
 <section class="section profile">
     <div class="row">
       <div class="col-xl-4">
@@ -68,24 +51,12 @@
                 <h5 class="card-title">Detalhes do perfil</h5>
 
                 <div class="row">
-                  <div class="col-lg-3 col-md-4 label ">Nome Completo</div>
-                  <div class="col-lg-9 col-md-8">{{ $user->first_name }} {{ $user->last_name }}</div>
+                  <div class="col-lg-3 col-md-4 label ">Nome</div>
+                  <div class="col-lg-9 col-md-8">{{ $user->name }}</div>
                 </div>
 
-                <div class="row">
-                  <div class="col-lg-3 col-md-4 label">Pais</div>
-                  <div class="col-lg-9 col-md-8">{{ $user->country }}</div>
-                </div>
-
-                <div class="row">
-                  <div class="col-lg-3 col-md-4 label">Endereço</div>
-                  <div class="col-lg-9 col-md-8">{{ $user->street }}, {{ $user->city }}, {{ $user->desc }}</div>
-                </div>
-
-                -<div class="row">
-                  <div class="col-lg-3 col-md-4 label">NIF</div>
-                  <div class="col-lg-9 col-md-8">{{ $user->nif }}</div>
-                </div>
+               
+                
 
                 <div class="row">
                   <div class="col-lg-3 col-md-4 label">Email</div>
@@ -115,54 +86,13 @@
 
 
                   <div class="row mb-3">
-                    <label for="first_name" class="col-md-4 col-lg-3 col-form-label">Primeiro Nome</label>
+                    <label for="name" class="col-md-4 col-lg-3 col-form-label">Nome</label>
                     <div class="col-md-8 col-lg-9">
-                      <input name="first_name" type="text" class="form-control" id="first_name" value="{{ $user->first_name }}">
+                      <input name="name" type="text" class="form-control" id="name" value="{{ $user->name }}">
                     </div>
                   </div>
                   <div class="row mb-3">
-                    <label for="last_name" class="col-md-4 col-lg-3 col-form-label">Sobrenome</label>
-                    <div class="col-md-8 col-lg-9">
-                      <input name="last_name" type="text" class="form-control" id="last_name" value="{{ $user->last_name }}">
-                    </div>
-                  </div>
 
-
-
-                  <div class="row mb-3">
-                    <label for="country" class="col-md-4 col-lg-3 col-form-label">Pais</label>
-                    <div class="col-md-8 col-lg-9">
-                      <input name="country" type="text" class="form-control" id="country" value="{{ $user->country }}">
-                    </div>
-                  </div>
-
-                  <div class="row mb-3">
-                    <label for="city" class="col-md-4 col-lg-3 col-form-label">Cidade</label>
-                    <div class="col-md-8 col-lg-9">
-                      <input name="city" type="text" class="form-control" id="city" value="{{ $user->city }}">
-                    </div>
-                  </div>
-
-                  <div class="row mb-3">
-                    <label for="street" class="col-md-4 col-lg-3 col-form-label">Rua</label>
-                    <div class="col-md-8 col-lg-9">
-                      <input name="street" type="text" class="form-control" id="street" value="{{ $user->street }}">
-                    </div>
-                  </div>
-
-                  <div class="row mb-3">
-                    <label for="desc" class="col-md-4 col-lg-3 col-form-label">Mais sobre o endereço</label>
-                    <div class="col-md-8 col-lg-9">
-                      <input name="desc" type="text" class="form-control" id="desc" value="{{ $user->desc }}">
-                    </div>
-                  </div>
-
-                  <div class="row mb-3">
-                    <label for="nif" class="col-md-4 col-lg-3 col-form-label">NIF</label>
-                    <div class="col-md-8 col-lg-9">
-                      <input name="nif" type="text" class="form-control" id="nif" value="{{ $user->nif }}">
-                    </div>
-                  </div>
 
                   <div class="row mb-3">
                     <label for="email" class="col-md-4 col-lg-3 col-form-label">Email</label>
@@ -170,12 +100,7 @@
                       <input name="email" type="email" class="form-control" id="email" value="{{ $user->email }}">
                     </div>
                   </div>
-                  <div class="row mb-3">
-                    <label for="name" class="col-md-4 col-lg-3 col-form-label">Nome de utilizador</label>
-                    <div class="col-md-8 col-lg-9">
-                      <input name="name" type="text" class="form-control" id="name" value="{{ $user->name }}">
-                    </div>
-                  </div>
+                  
 
                   <div class="text-center">
                     <button type="submit" class="btn btn-primary">Salvar Alterações</button>

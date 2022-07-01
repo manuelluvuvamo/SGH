@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Models\Experiencia;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
@@ -302,6 +304,21 @@ class FuncionarioController extends Controller
             return $data;
           
         }
+    }
+
+
+    public function ver($id){
+        $dados["funcionario"] = Funcionario::join('funcaos', 'funcionarios.idFuncao', 'funcaos.id')
+
+        ->select(
+            'funcionarios.*',
+            'funcaos.nome  as nome_funcao',
+           
+        )->where('funcionarios.id',$id)->get()->first();
+
+        $dados["experiencias"] = Experiencia::where("idFuncionario",$id);
+
+        return view("admin.funcionario.ver",$dados);
     }
 
 }
