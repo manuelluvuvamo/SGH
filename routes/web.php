@@ -23,7 +23,14 @@ Route::middleware([
     'verified'
 ])->group(function () {
     Route::get('/', function () {
-        return view('dash');
+
+        $dados["total_departamento"] = \App\Models\Departamento::count();
+        $dados["total_funcao"] = \App\Models\Funcao::count();
+        $dados["total_funcionario"] = \App\Models\Funcionario::count();
+        $dados["total_user"] = \App\Models\User::count();
+        
+    
+        return view('dash',$dados);
     })->name('dash');
 });
 
@@ -33,7 +40,13 @@ Route::middleware([
     'verified'
 ])->group(function () {
     Route::get('/dash', function () {
-        return view('dash');
+        $dados["total_departamento"] = \App\Models\Departamento::count();
+        $dados["total_funcao"] = \App\Models\Funcao::count();
+        $dados["total_funcionario"] = \App\Models\Funcionario::count();
+        $dados["total_user"] = \App\Models\User::count();
+        
+    
+        return view('dash',$dados);
     })->name('dash');
 });
 

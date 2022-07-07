@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Experiencia;
 use App\Models\Formacao;
+use App\Models\Admissao;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
@@ -319,6 +320,7 @@ class FuncionarioController extends Controller
 
         $dados["experiencias"] = Experiencia::where("idFuncionario",$id)->get();
         $dados["formacaos"] = Formacao::where("idFuncionario",$id)->get();
+        $dados["admissaos"] = Admissao::where("idFuncionario",$id)->get();
 
         
 

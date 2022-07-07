@@ -1,7 +1,10 @@
 
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="PT-pt">
+  @php
+  $instituicao = \App\Models\Instituicao::get()->first();
+  //dd( $instituicao);
+@endphp
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
@@ -51,8 +54,8 @@
 
             <div class="d-flex justify-content-center py-4">
               <a href="index.html" class="logo d-flex align-items-center w-auto">
-                <img src="{{asset('dashboard/img/logo.png')}}" alt="">
-                <span class="d-none d-lg-block">SGH</span>
+                <img src="{{isset($instituicao->logo)?$instituicao->logo:'/dashboard/img/logo.png'}}" alt="">
+                <span class="d-none d-lg-block">{{isset($instituicao->nomeCurto)?$instituicao->nomeCurto:'SGH'}}</span>
               </a>
             </div><!-- End Logo -->
 
