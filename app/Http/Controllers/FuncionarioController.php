@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Experiencia;
 use App\Models\Formacao;
 use App\Models\Admissao;
+use App\Models\Demissao;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
@@ -12,6 +13,7 @@ use App\Models\Funcao;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Funcionario;
+use App\Models\Remuneracao;
 use Illuminate\Support\Facades\Http;
 
 class FuncionarioController extends Controller
@@ -321,6 +323,8 @@ class FuncionarioController extends Controller
         $dados["experiencias"] = Experiencia::where("idFuncionario",$id)->get();
         $dados["formacaos"] = Formacao::where("idFuncionario",$id)->get();
         $dados["admissaos"] = Admissao::where("idFuncionario",$id)->get();
+        $dados["demissaos"] = Demissao::where("idFuncionario",$id)->get();
+        $dados["remuneracaos"] = Remuneracao::where("idFuncionario",$id)->get();
 
         
 
@@ -352,5 +356,22 @@ class FuncionarioController extends Controller
         $data['funcionarios'] = Funcionario::where("id",$id)->get();
        
         return view('admin.admissao.index',$data);
+    }
+
+    public function addDemissao($id){
+        
+        $data['page'] = "criar";
+        $data['func'] = 1;
+        $data['funcionarios'] = Funcionario::where("id",$id)->get();
+       
+        return view('admin.demissao.index',$data);
+    }
+    public function addRemuneracao($id){
+        
+        $data['page'] = "criar";
+        $data['func'] = 1;
+        $data['funcionarios'] = Funcionario::where("id",$id)->get();
+       
+        return view('admin.remuneracao.index',$data);
     }
 }

@@ -310,6 +310,16 @@
               <i class="bi bi-circle"></i><span>Admissão</span>
             </a>
           </li>
+          <li>
+            <a href="{{route('admin.demissao.list')}}">
+              <i class="bi bi-circle"></i><span>Demissão</span>
+            </a>
+          </li>
+          <li>
+            <a href="{{route('admin.remuneracao.list')}}">
+              <i class="bi bi-circle"></i><span>Remuneração</span>
+            </a>
+          </li>
          
         </ul>
       </li><!-- End Dados do funcionário Nav -->

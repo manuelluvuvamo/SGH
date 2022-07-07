@@ -130,6 +130,9 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/add/{id}/experiencia', ['as' => 'admin.funcionario.addExperiencia', 'uses' => 'FuncionarioController@addExperiencia']);
         Route::get('/add/{id}/formacao', ['as' => 'admin.funcionario.addFormacao', 'uses' => 'FuncionarioController@addFormacao']);
         Route::get('/add/{id}/admissao', ['as' => 'admin.funcionario.addAdmissao', 'uses' => 'FuncionarioController@addAdmissao']);
+        Route::get('/add/{id}/demissao', ['as' => 'admin.funcionario.addDemissao', 'uses' => 'FuncionarioController@addDemissao']);
+        Route::get('/add/{id}/remuneracao', ['as' => 'admin.funcionario.addRemuneracao', 'uses' => 'FuncionarioController@addRemuneracao']);
+
 
         Route::post('/contribuinte', ['as' => 'admin.funcionario.contribuinte', 'uses' => 'FuncionarioController@contribuinte']);
         
@@ -180,5 +183,37 @@ Route::group(['middleware' => 'auth'], function () {
     });
     
     //ADMISSAO END
+
+
+     //DEMISSAO START
+     Route::prefix('demissao')->group(function () {
+
+   
+        Route::get('/create', ['as' => 'admin.demissao.create', 'uses' => 'DemissaoController@create']);
+        Route::get('/edit/{id}', ['as' => 'admin.demissao.edit', 'uses' => 'DemissaoController@edit']);
+        Route::post('/store', ['as' => 'admin.demissao.store', 'uses' => 'DemissaoController@store']);
+        Route::get('/list', ['as' => 'admin.demissao.list', 'uses' => 'DemissaoController@list']);
+        Route::get('/delete/{id}', ['as' => 'admin.demissao.delete', 'uses' => 'DemissaoController@delete']);
+        Route::put('/update/{id}', ['as' => 'admin.demissao.update', 'uses' => 'DemissaoController@update']);
+        Route::get('/purge/{id}', ['as' => 'admin.demissao.purge', 'uses' => 'DemissaoController@purge']);
+    });
+    
+    //DEMISSAO END
+
+
+     //REMUNERACAO START
+     Route::prefix('remuneracao')->group(function () {
+
+   
+        Route::get('/create', ['as' => 'admin.remuneracao.create', 'uses' => 'RemuneracaoController@create']);
+        Route::get('/edit/{id}', ['as' => 'admin.remuneracao.edit', 'uses' => 'RemuneracaoController@edit']);
+        Route::post('/store', ['as' => 'admin.remuneracao.store', 'uses' => 'RemuneracaoController@store']);
+        Route::get('/list', ['as' => 'admin.remuneracao.list', 'uses' => 'RemuneracaoController@list']);
+        Route::get('/delete/{id}', ['as' => 'admin.remuneracao.delete', 'uses' => 'RemuneracaoController@delete']);
+        Route::put('/update/{id}', ['as' => 'admin.remuneracao.update', 'uses' => 'RemuneracaoController@update']);
+        Route::get('/purge/{id}', ['as' => 'admin.remuneracao.purge', 'uses' => 'RemuneracaoController@purge']);
+    });
+    
+    //REMUNERACAO END
 
 });

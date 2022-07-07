@@ -1,5 +1,5 @@
 @extends('layouts.merge.painel')
-@section('titulo', 'Funcionários')
+@section('titulo', 'Remuneração do funcionario')
 @section('conteudo')
 
 
@@ -7,11 +7,11 @@
 
 
     <div class="pagetitle">
-      <h1>Funcionários</h1>
+      <h1>Remuneração do funcionario</h1>
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="#">Home</a></li>
-          <li class="breadcrumb-item">Funcionários</li>
+          <li class="breadcrumb-item">Remuneração do funcionario</li>
           <li class="breadcrumb-item active">{{$page}}</li>
         </ol>
       </nav>
@@ -21,51 +21,44 @@
     @isset($page)
         @if ($page=="lista")
           <div class="d-flex justify-content-end mb-3">
-            <a class="btn " href="{{ route('admin.funcionario.create') }}" style="background-color: #012970;">
-                <strong class="text-light">Adicionar novo funcionário</strong>
+            <a class="btn " href="{{ route('admin.remuneracao.create') }}" style="background-color: #012970;">
+                <strong class="text-light">Adicionar Remuneração</strong>
             </a>
           </div>
-            {{-- List of funcionarios --}}
+            {{-- List of remuneracaos --}}
             <section class="section">
                 <div class="row">
                 <div class="col-lg-12">
         
                     <div class="card">
                     <div class="card-body table-responsive">
-                        <h5 class="card-title">Lista de Funcionários</h5>
+                        <h5 class="card-title">Lista de Remuneração do funcionario</h5>
                                 <!-- Table with stripped rows -->
                             <table class=" datatable ">
                                 <thead>
                                 <tr>
+                                 
                                     <th scope="col">#</th>
-                                    <th scope="col">Nome</th>
-                                    <th scope="col">Gênero</th>
-                                    <th scope="col">Data de Nascimento</th>
-                                    <th scope="col">Nacionalidade</th>
-                                    <th scope="col">BI</th>
-                                    <th scope="col">IBAN</th>
-                                    <th scope="col">Endereço</th>
-                                    <th scope="col">Telefone</th>
-                                    <th scope="col">Estado</th>
+                                    <th scope="col">Funcionario</th>
+                                    <th scope="col">Salário liquido</th>
+                                    <th scope="col">Salário base</th>
+                                    <th scope="col">Tipo</th>
+                                    <th scope="col">Estado</th>               
                                     <th scope="col">Accções</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                              @foreach ($funcionarios as $funcionario)
+                              @foreach ($remuneracaos as $remuneracao)
                                 <tr>
-                                    <th scope="row">{{$funcionario->id}}</th>
-                                    <td>{{$funcionario->nome}}</td>
-                                    <td>{{$funcionario->genero}}</td>
-                                    <td>{{$funcionario->dataNascimento}}</td>
-                                    <td>{{$funcionario->nacionalidade}}</td>
-                                    <td>{{$funcionario->numBi}}</td>
-                                   
-                                    <td>{{$funcionario->iban}}</td>
-                                    <td>{{$funcionario->endereco}}</td>
-                                    <td>{{$funcionario->telefone}}</td>
-                                    <td>@if ($funcionario->status == 0)
+                                
+                                    <th scope="row">{{$remuneracao->id}}</th>
+                                    <td>{{$remuneracao->nome_funcionario}}</td>
+                                    <td>{{ number_format($remuneracao->salario_liquido , 2, ",", ".") }}Akz</td>
+                                    <td>{{ number_format($remuneracao->salario_base , 2, ",", ".") }}Akz</td>
+                                    <td>{{$remuneracao->tipo}}</td>
+                                    <td>@if ($remuneracao->status == 0)
                                         <span style="color: red;">Desativado</span>
-                                    @elseif($funcionario->status == 1)
+                                    @elseif($remuneracao->status == 1)
                                        <span style="color: green;">Activo</span>
                                     @endif</td>  
                                    
@@ -96,85 +89,20 @@
                                 
                                             <li class="message-item">
                                              
-                                                   <a href="{{ route('admin.funcionario.edit', $funcionario->id) }}"
+                                                   <a href="{{ route('admin.remuneracao.edit', $remuneracao->id) }}"
                                                       class="dropdown-item">
                                                     <img src="assets/img/messages-2.jpg" alt="" class="rounded-circle">
                                                     Editar
                                                   </a>
                                                  
                                             </li>
-                                            <li class="message-item">
-                                             
-                                              <a href="{{ route('admin.funcionario.ver', $funcionario->id) }}"
-                                                 class="dropdown-item">
-                                               <img src="assets/img/messages-2.jpg" alt="" class="rounded-circle">
-                                               Visualizar
-                                             </a>
-                                            
-                                          </li>
-
-                                          <li class="message-item">
-                                             
-                                            <a href="{{ route('admin.funcionario.addExperiencia', $funcionario->id) }}"
-                                               class="dropdown-item">
-                                             <img src="assets/img/messages-2.jpg" alt="" class="rounded-circle">
-                                             Adicionar experiência
-                                           </a>
-                                          
-                                          </li>
-                                          <li class="message-item">
-                                             
-                                            <a href="{{ route('admin.funcionario.addFormacao', $funcionario->id) }}"
-                                               class="dropdown-item">
-                                             <img src="assets/img/messages-2.jpg" alt="" class="rounded-circle">
-                                             Adicionar formação
-                                           </a>
-                                          
-                                          </li>
-                                          <li class="message-item">
-                                             
-                                            <a href="{{ route('admin.funcionario.addAdmissao', $funcionario->id) }}"
-                                               class="dropdown-item">
-                                             <img src="assets/img/messages-2.jpg" alt="" class="rounded-circle">
-                                             Adicionar admissão
-                                           </a>
-                                          
-                                          </li>
 
                                             <li>
                                               <hr class="dropdown-divider">
                                             </li>
-
-                                            <li class="message-item">
-                                             
-                                              <a href="{{ route('admin.funcionario.addDemissao', $funcionario->id) }}"
-                                                 class="dropdown-item">
-                                               <img src="assets/img/messages-2.jpg" alt="" class="rounded-circle">
-                                               Adicionar demissão
-                                             </a>
-                                            
-                                            </li>
-  
-                                            <li>
-                                              <hr class="dropdown-divider">
-                                            </li>
-
-                                            <li class="message-item">
-                                             
-                                              <a href="{{ route('admin.funcionario.addRemuneracao', $funcionario->id) }}"
-                                                 class="dropdown-item">
-                                               <img src="assets/img/messages-2.jpg" alt="" class="rounded-circle">
-                                               Adicionar remuneração
-                                             </a>
-                                            
-                                            </li>
-  
-                                              <li>
-                                                <hr class="dropdown-divider">
-                                              </li>
                                 
                                             <li class="message-item">
-                                              <a href="{{ route('admin.funcionario.delete', $funcionario->id) }}"
+                                              <a href="{{ route('admin.remuneracao.delete', $remuneracao->id) }}"
                                                   class="dropdown-item"
                                                   data-confirm="Are you sure that?">
                                                 <img src="assets/img/messages-2.jpg" alt="" class="rounded-circle">
@@ -185,7 +113,7 @@
                                               <hr class="dropdown-divider">
                                             </li>
                                             <li class="message-item">
-                                              <a href="{{ route('admin.funcionario.purge', $funcionario->id) }}"
+                                              <a href="{{ route('admin.remuneracao.purge', $remuneracao->id) }}"
                                                   class="dropdown-item"
                                                   data-confirm="Tem certeza que deseja eliminar permanentemente?">
                                                
@@ -215,19 +143,19 @@
                 </div>
             </section>
         @elseif($page == "criar")
-               {{--  funcionario creation --}}
+               {{--  remuneracao creation --}}
             <section class="section">
               <div class="row">
               <div class="col-lg-12">
       
                   <div class="card">
                   <div class="card-body">
-                      <h5 class="card-title">Cadastro de funcionário</h5>
+                      <h5 class="card-title">Cadastro de Remuneração do funcionario</h5>
                           
-                      <form action="{{ route('admin.funcionario.store')}}" method="post"  enctype="multipart/form-data" class="row g-3 needs-validation" novalidate>
+                      <form action="{{ route('admin.remuneracao.store')}}" method="post"  enctype="multipart/form-data" class="row g-3 needs-validation" novalidate>
 
                         @csrf
-                        @include('forms._formFuncionario.index')
+                        @include('forms._formRemuneracao.index')
                           <div class="form-group text-center mx-auto col-md-3">
                             <label class="text-white">lorem</label>
                             <button type="submit" class="btn col-md-12" style="background-color: #012970; color:white;">
@@ -251,12 +179,12 @@
     
                 <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">Edição de funcionário</h5>
+                    <h5 class="card-title">Edição de remuneracao do funcionario</h5>
                         
-                    <form action="{{ route('admin.funcionario.update',$id)}}" method="post"  enctype="multipart/form-data" class="row g-3 needs-validation" novalidate>
+                    <form action="{{ route('admin.remuneracao.update',$id)}}" method="post"  enctype="multipart/form-data" class="row g-3 needs-validation" novalidate>
                       @method('put')
                       @csrf
-                      @include('forms._formFuncionario.index')
+                      @include('forms._formRemuneracao.index')
                         <div class="form-group text-center mx-auto col-md-3">
                           <label class="text-white">lorem</label>
                           <button type="submit" class="btn col-md-12" style="background-color: #012970; color:white;">
@@ -277,10 +205,10 @@
     @endisset
 
         {{-- CREATION --}}
-@if (session('funcionario.create.success'))
+@if (session('remuneracao.create.success'))
 <script>
     Swal.fire(
-        'Funcionário criado!',
+        'Remuneração do funcionario criada!',
         '',
         'success'
     )
@@ -288,10 +216,10 @@
 </script>
 @endif
 
-@if (session('funcionario.create.error'))
+@if (session('remuneracao.create.error'))
 <script>
     Swal.fire(
-        'Falha ao criar Funcionário!',
+        'Falha ao criar Remuneração do funcionario!',
         '',
         'error'
     )
@@ -300,10 +228,10 @@
 @endif
 
 {{-- EDITION --}}
-@if (session('funcionario.update.success'))
+@if (session('remuneracao.update.success'))
 <script>
     Swal.fire(
-        'Funcionário actualizado!',
+        'Remuneração do funcionario actualizada!',
         '',
         'success'
     )
@@ -311,10 +239,10 @@
 </script>
 @endif
 
-@if (session('funcionario.update.error'))
+@if (session('remuneracao.update.error'))
 <script>
     Swal.fire(
-        'Falha ao actualizar o funcionário!',
+        'Falha ao actualizar a Remuneração do funcionario!',
         '',
         'error'
     )
@@ -324,10 +252,10 @@
 
 {{-- DELETE --}}
 
-@if (session('funcionario.delete.success'))
+@if (session('remuneracao.delete.success'))
 <script>
     Swal.fire(
-        'Funcionário eliminada',
+        'Remuneração do funcionario eliminada',
         '',
         'success'
     )
@@ -335,10 +263,10 @@
 </script>
 @endif
 
-@if (session('funcionario.delete.error'))
+@if (session('remuneracao.delete.error'))
 <script>
     Swal.fire(
-        'Erro ao eliminar Funcionário!',
+        'Erro ao eliminar Remuneração do funcionario!',
         '',
         'error'
     )
@@ -349,10 +277,10 @@
 
 {{--  PURGE --}}
 
-@if (session('funcionario.purge.success'))
+@if (session('remuneracao.purge.success'))
 <script>
     Swal.fire(
-        'Funcionário purgado',
+        'Remuneração do funcionario purgada',
         '',
         'success'
     )
@@ -360,10 +288,10 @@
 </script>
 @endif
 
-@if (session('funcionario.purge.error'))
+@if (session('remuneracao.purge.error'))
 <script>
     Swal.fire(
-        'Erro ao purgar funcionário!',
+        'Erro ao purgar Remuneração do funcionario!',
         '',
         'error'
     )

@@ -43,7 +43,12 @@
               <li class="nav-item">
                 <button class="nav-link" data-bs-toggle="tab" data-bs-target="#admissao">Admissão</button>
               </li>
-
+              <li class="nav-item">
+                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#demissao">Demissão</button>
+              </li>
+              <li class="nav-item">
+                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#remuneracao">Remuneração</button>
+              </li>
              
 
             </ul>
@@ -223,6 +228,70 @@
                         <div class="col-lg-3 col-md-4 label ">Nº de registro</div>
                         <div class="col-lg-9 col-md-8">{{ $admissao->numRegistro }}</div>
                       </div>
+                    </div>
+                     
+                   @endforeach
+                    
+                @endif
+
+              </div>
+
+                  
+              <div class="tab-pane fade profile-edit pt-3" id="demissao">
+
+                <h5 class="card-title">Demissão</h5>
+                @if (isset($demissaos))
+ 
+                   @foreach ($demissaos as $demissao)
+                       
+                    <div class="row mt-3">
+                        <p>Demissão nº {{$demissao->id}}</p>
+                        <hr>
+                       
+                       
+                      <div class="row">
+                        <div class="col-lg-3 col-md-4 label ">Motivo</div>
+                        <div class="col-lg-9 col-md-8">{{ $demissao->motivo }}</div>
+                      </div>
+                      <div class="row">
+                        <div class="col-lg-3 col-md-4 label ">Descrição</div>
+                        <div class="col-lg-9 col-md-8">{{ $demissao->descricao }}</div>
+                      </div>
+                     
+                    </div>
+                     
+                   @endforeach
+                    
+                @endif
+
+              </div>
+
+
+              <div class="tab-pane fade profile-edit pt-3" id="remuneracao">
+
+                <h5 class="card-title">Remuneração</h5>
+                @if (isset($remuneracaos))
+ 
+                   @foreach ($remuneracaos as $remuneracao)
+                       
+                    <div class="row mt-3">
+                        <p>Remuneração nº {{$remuneracao->id}}</p>
+                        <hr>
+                       
+                       
+                      <div class="row">
+                        <div class="col-lg-3 col-md-4 label ">Salário liquido</div>
+                        <div class="col-lg-9 col-md-8">{{ number_format($remuneracao->salario_liquido , 2, ",", ".") }}Akz</div>
+                      </div>
+                      <div class="row">
+                        <div class="col-lg-3 col-md-4 label ">Salário base</div>
+                        <div class="col-lg-9 col-md-8">{{ number_format($remuneracao->salario_base , 2, ",", ".") }} Akz</div>
+                      </div>
+                      <div class="row">
+                        <div class="col-lg-3 col-md-4 label ">tipo</div>
+                        <div class="col-lg-9 col-md-8">{{ $remuneracao->tipo }}</div>
+                      </div>
+                     
                     </div>
                      
                    @endforeach
