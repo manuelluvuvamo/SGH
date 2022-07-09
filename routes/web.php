@@ -132,6 +132,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/add/{id}/admissao', ['as' => 'admin.funcionario.addAdmissao', 'uses' => 'FuncionarioController@addAdmissao']);
         Route::get('/add/{id}/demissao', ['as' => 'admin.funcionario.addDemissao', 'uses' => 'FuncionarioController@addDemissao']);
         Route::get('/add/{id}/remuneracao', ['as' => 'admin.funcionario.addRemuneracao', 'uses' => 'FuncionarioController@addRemuneracao']);
+        Route::get('/add/{id}/medico', ['as' => 'admin.funcionario.addMedico', 'uses' => 'FuncionarioController@addMedico']);
 
 
         Route::post('/contribuinte', ['as' => 'admin.funcionario.contribuinte', 'uses' => 'FuncionarioController@contribuinte']);
@@ -215,5 +216,35 @@ Route::group(['middleware' => 'auth'], function () {
     });
     
     //REMUNERACAO END
+
+     //ESPECIALIDADE START
+     Route::prefix('especialidade')->group(function () {
+
+   
+        Route::get('/create', ['as' => 'admin.especialidade.create', 'uses' => 'EspecialidadeController@create']);
+        Route::get('/edit/{id}', ['as' => 'admin.especialidade.edit', 'uses' => 'EspecialidadeController@edit']);
+        Route::post('/store', ['as' => 'admin.especialidade.store', 'uses' => 'EspecialidadeController@store']);
+        Route::get('/list', ['as' => 'admin.especialidade.list', 'uses' => 'EspecialidadeController@list']);
+        Route::get('/delete/{id}', ['as' => 'admin.especialidade.delete', 'uses' => 'EspecialidadeController@delete']);
+        Route::put('/update/{id}', ['as' => 'admin.especialidade.update', 'uses' => 'EspecialidadeController@update']);
+        Route::get('/purge/{id}', ['as' => 'admin.especialidade.purge', 'uses' => 'EspecialidadeController@purge']);
+    });
+    
+    //ESPECIALIDADE END
+
+    //MÉDICO START
+    Route::prefix('medico')->group(function () {
+
+   
+        Route::get('/create', ['as' => 'admin.medico.create', 'uses' => 'MedicoController@create']);
+        Route::get('/edit/{id}', ['as' => 'admin.medico.edit', 'uses' => 'MedicoController@edit']);
+        Route::post('/store', ['as' => 'admin.medico.store', 'uses' => 'MedicoController@store']);
+        Route::get('/list', ['as' => 'admin.medico.list', 'uses' => 'MedicoController@list']);
+        Route::get('/delete/{id}', ['as' => 'admin.medico.delete', 'uses' => 'MedicoController@delete']);
+        Route::put('/update/{id}', ['as' => 'admin.medico.update', 'uses' => 'MedicoController@update']);
+        Route::get('/purge/{id}', ['as' => 'admin.medico.purge', 'uses' => 'MedicoController@purge']);
+    });
+    
+    //MÉDICO END
 
 });

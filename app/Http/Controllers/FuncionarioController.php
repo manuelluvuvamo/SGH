@@ -6,6 +6,7 @@ use App\Models\Experiencia;
 use App\Models\Formacao;
 use App\Models\Admissao;
 use App\Models\Demissao;
+use App\Models\Especialidade;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
@@ -13,6 +14,7 @@ use App\Models\Funcao;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Funcionario;
+use App\Models\Medico;
 use App\Models\Remuneracao;
 use Illuminate\Support\Facades\Http;
 
@@ -325,6 +327,16 @@ class FuncionarioController extends Controller
         $dados["admissaos"] = Admissao::where("idFuncionario",$id)->get();
         $dados["demissaos"] = Demissao::where("idFuncionario",$id)->get();
         $dados["remuneracaos"] = Remuneracao::where("idFuncionario",$id)->get();
+        $dados['medicos'] = Medico::join('especialidades', 'medicos.idEspecialidade', 'especialidades.id')
+        ->join('funcionarios', 'medicos.idFuncionario', 'funcionarios.id')
+        ->select(
+            'medicos.*',
+            'especialidades.nome  as nome_especialidade',
+            'funcionarios.nome  as nome_funcionario',
+           
+        )
+        ->where('medicos.idFuncionario',$id)
+        ->get();
 
         
 
@@ -373,5 +385,14 @@ class FuncionarioController extends Controller
         $data['funcionarios'] = Funcionario::where("id",$id)->get();
        
         return view('admin.remuneracao.index',$data);
+    }
+    public function addMedico($id){
+        
+        $data['page'] = "criar";
+        $data['func'] = 1;
+        $data['especialidades'] = Especialidade::all();
+        $data['funcionarios'] = Funcionario::where("id",$id)->get();
+       
+        return view('admin.medico.index',$data);
     }
 }

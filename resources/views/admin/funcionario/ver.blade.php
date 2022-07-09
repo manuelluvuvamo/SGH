@@ -49,6 +49,12 @@
               <li class="nav-item">
                 <button class="nav-link" data-bs-toggle="tab" data-bs-target="#remuneracao">Remuneração</button>
               </li>
+
+              @if (isset($medicos))
+              <li class="nav-item">
+                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#medico">Dados de Médico</button>
+              </li>
+              @endif
              
 
             </ul>
@@ -65,7 +71,7 @@
                 </div>
 
                 <div class="row">
-                  <div class="col-lg-3 col-md-4 label ">Gêneroê</div>
+                  <div class="col-lg-3 col-md-4 label ">Gênero</div>
                   <div class="col-lg-9 col-md-8">{{ $funcionario->genero }}</div>
                 </div>
 
@@ -300,6 +306,38 @@
 
               </div>
 
+              <div class="tab-pane fade profile-edit pt-3" id="medico">
+
+                <h5 class="card-title">Dados de Médico</h5>
+                @if (isset($medicos))
+ 
+                   @foreach ($medicos as $medico)
+                       
+                    <div class="row mt-3">
+                        <p>Dados de Médico nº {{$medico->id}}</p>
+                        <hr>
+                       
+                       
+                      <div class="row">
+                        <div class="col-lg-3 col-md-4 label ">Especialidade</div>
+                        <div class="col-lg-9 col-md-8">{{ $medico->nome_especialidade }}</div>
+                      </div>
+                      <div class="row">
+                        <div class="col-lg-3 col-md-4 label ">Nº de ordem</div>
+                        <div class="col-lg-9 col-md-8">{{ $medico->numOrdem }} </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-lg-3 col-md-4 label ">País de ordem</div>
+                        <div class="col-lg-9 col-md-8">{{ $medico->paisOrdem }}</div>
+                      </div>
+                     
+                    </div>
+                     
+                   @endforeach
+                    
+                @endif
+
+              </div>
 
 
               

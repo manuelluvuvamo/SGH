@@ -172,6 +172,21 @@
                                               <li>
                                                 <hr class="dropdown-divider">
                                               </li>
+
+                                              <li class="message-item">
+                                             
+                                                <a href="{{ route('admin.funcionario.addMedico', $funcionario->id) }}"
+                                                   class="dropdown-item">
+                                                 <img src="assets/img/messages-2.jpg" alt="" class="rounded-circle">
+                                                 Adicionar dados <br>
+                                                 de médico
+                                               </a>
+                                              
+                                              </li>
+    
+                                                <li>
+                                                  <hr class="dropdown-divider">
+                                                </li>
                                 
                                             <li class="message-item">
                                               <a href="{{ route('admin.funcionario.delete', $funcionario->id) }}"

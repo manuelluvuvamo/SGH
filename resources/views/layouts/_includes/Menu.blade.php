@@ -320,7 +320,16 @@
               <i class="bi bi-circle"></i><span>Remuneração</span>
             </a>
           </li>
-         
+          <li>
+            <a href="{{route('admin.especialidade.list')}}">
+              <i class="bi bi-circle"></i><span>Especialidade</span>
+            </a>
+          </li>
+          <li>
+            <a href="{{route('admin.medico.list')}}">
+              <i class="bi bi-circle"></i><span>Dados de Médico</span>
+            </a>
+          </li>
         </ul>
       </li><!-- End Dados do funcionário Nav -->
 
