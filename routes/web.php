@@ -247,4 +247,35 @@ Route::group(['middleware' => 'auth'], function () {
     
     //MÉDICO END
 
+    //CRITÉRIO START
+    Route::prefix('criterio-avaliacao')->group(function () {
+
+   
+        Route::get('/create', ['as' => 'admin.criterio-avaliacao.create', 'uses' => 'CriterioAvaliacaoController@create']);
+        Route::get('/edit/{id}', ['as' => 'admin.criterio-avaliacao.edit', 'uses' => 'CriterioAvaliacaoController@edit']);
+        Route::post('/store', ['as' => 'admin.criterio-avaliacao.store', 'uses' => 'CriterioAvaliacaoController@store']);
+        Route::get('/list', ['as' => 'admin.criterio-avaliacao.list', 'uses' => 'CriterioAvaliacaoController@list']);
+        Route::get('/delete/{id}', ['as' => 'admin.criterio-avaliacao.delete', 'uses' => 'CriterioAvaliacaoController@delete']);
+        Route::put('/update/{id}', ['as' => 'admin.criterio-avaliacao.update', 'uses' => 'CriterioAvaliacaoController@update']);
+        Route::get('/purge/{id}', ['as' => 'admin.criterio-avaliacao.purge', 'uses' => 'CriterioAvaliacaoController@purge']);
+    });
+    
+    //CRITÉRIO END
+
+    //NÍVEL START
+    Route::prefix('nivel-avaliacao')->group(function () {
+
+   
+        Route::get('/create', ['as' => 'admin.nivel-avaliacao.create', 'uses' => 'NivelAvaliacaoController@create']);
+        Route::get('/edit/{id}', ['as' => 'admin.nivel-avaliacao.edit', 'uses' => 'NivelAvaliacaoController@edit']);
+        Route::post('/store', ['as' => 'admin.nivel-avaliacao.store', 'uses' => 'NivelAvaliacaoController@store']);
+        Route::get('/list', ['as' => 'admin.nivel-avaliacao.list', 'uses' => 'NivelAvaliacaoController@list']);
+        Route::get('/delete/{id}', ['as' => 'admin.nivel-avaliacao.delete', 'uses' => 'NivelAvaliacaoController@delete']);
+        Route::put('/update/{id}', ['as' => 'admin.nivel-avaliacao.update', 'uses' => 'NivelAvaliacaoController@update']);
+        Route::get('/purge/{id}', ['as' => 'admin.nivel-avaliacao.purge', 'uses' => 'NivelAvaliacaoController@purge']);
+    });
+    
+    //NÍVEL END
+
+
 });

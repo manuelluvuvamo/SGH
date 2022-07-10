@@ -333,6 +333,24 @@
         </ul>
       </li><!-- End Dados do funcionário Nav -->
 
+      <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#avaliacao" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-star-half"></i><span>Avaliação do funcionário</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="avaliacao" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="{{route('admin.criterio-avaliacao.list')}}">
+              <i class="bi bi-circle"></i><span>Critérios de avaliação</span>
+            </a>
+          </li>
+          <li>
+            <a href="{{route('admin.nivel-avaliacao.list')}}">
+              <i class="bi bi-circle"></i><span>Níveis de avaliação</span>
+            </a>
+          </li>
+          
+        </ul>
+      </li><!-- End avaliação do funcionário Nav -->
       
 
 
