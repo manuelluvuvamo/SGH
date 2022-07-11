@@ -36,7 +36,7 @@
         <option {{isset($user->tipo_conta)?'':'selected'}} disabled value="">Seleccione um tipo</option>
         <option value="Administrador" {{ (isset($user->tipo_conta) && ($user->tipo_conta == "Administrador")) ? 'selected': '' }}>Administrador</option>
        
-        <option value="Enfermeiro" {{ (isset($user->tipo_conta) && ($user->tipo_conta == "Enfermeiro")) ? 'selected': '' }}>Enfermeiro</option>
+        <option value="Funcionario" {{ (isset($user->tipo_conta) && ($user->tipo_conta == "Funcionario")) ? 'selected': '' }}>Funcionario</option>
        
        
        

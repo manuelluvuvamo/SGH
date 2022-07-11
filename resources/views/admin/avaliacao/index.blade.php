@@ -1,5 +1,5 @@
 @extends('layouts.merge.painel')
-@section('titulo', 'Lista de departamentos')
+@section('titulo', 'Lista  de Avaliações')
 @section('conteudo')
 
 
@@ -7,11 +7,11 @@
 
 
     <div class="pagetitle">
-      <h1>Departamentos</h1>
+      <h1>  Avaliações</h1>
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.html">Painel</a></li>
-          <li class="breadcrumb-item">Departamentos</li>
+          <li class="breadcrumb-item">Avaliações</li>
           <li class="breadcrumb-item active">{{$page}}</li>
         </ol>
       </nav>
@@ -20,41 +20,41 @@
 
     @isset($page)
         @if ($page=="lista")
-        @if (Auth::user()->tipo_conta == "Administrador" || \App\Models\Acesso::where("idUser",Auth::user()->id)->where("menu","Departamentos")->where("nivel",">=",2)->get()->first())
           <div class="d-flex justify-content-end mb-3">
-            <a class="btn " href="{{ route('admin.departamento.create') }}" style="background-color: #012970;">
-                <strong class="text-light">Adicionar novo departamento</strong>
+            <a class="btn " href="{{ route('admin.avaliacao.create') }}" style="background-color: #012970;">
+                <strong class="text-light">Adicionar nova  avaliação</strong>
             </a>
           </div>
-          @endif
-            {{-- List of departamentos --}}
+            {{-- List of avaliacaos --}}
             <section class="section">
                 <div class="row">
                 <div class="col-lg-12">
         
                     <div class="card">
                     <div class="card-body table-responsive">
-                        <h5 class="card-title">Lista de departamentos</h5>
+                        <h5 class="card-title">Lista de avaliacaos</h5>
                                 <!-- Table with stripped rows -->
                             <table class=" datatable ">
                                 <thead>
                                 <tr>
                                     <th scope="col">#</th>
-                                    <th scope="col">Nome</th>
-                                    <th scope="col">Responsável</th>
+                                    <th scope="col">Funcionário</th>
+                                    <th scope="col">Avaliador</th>
+                                    <th scope="col">Data de avaliação</th>
                                     <th scope="col">Estado</th>
                                     <th scope="col">Accções</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                              @foreach ($departamentos as $departamento)
+                              @foreach ($avaliacaos as $avaliacao)
                                 <tr>
-                                    <th scope="row">{{$departamento->id}}</th>
-                                    <td>{{$departamento->nome}}</td>
-                                    <td>{{$departamento->responsavel}}</td>
-                                    <td>@if ($departamento->status == 0)
+                                    <th scope="row">{{$avaliacao->id}}</th>
+                                    <td>{{$avaliacao->nome}}</td>
+                                    <td>{{$avaliacao->name}}</td>
+                                    <td>{{$avaliacao->created_at}}</td>
+                                    <td>@if ($avaliacao->status == 0)
                                       <span style="color: red;">Desativado</span>
-                                  @elseif($departamento->status == 1)
+                                  @elseif($avaliacao->status == 1)
                                      <span style="color: green;">Activo</span>
                                   @endif</td>
                                    
@@ -80,38 +80,45 @@
                                             </a><!-- End actions Icon -->
                                   
                                             <ul class="dropdown-menu dropdown-menu-center dropdown-menu-arrow messages">
-                                              
-                                                @if (Auth::user()->tipo_conta == "Administrador" || \App\Models\Acesso::where("idUser",Auth::user()->id)->where("menu","Departamentos")->where("nivel",">=",3)->get()->first())
+                                  
                                               <li class="message-item">
                                                
-                                                     <a href="{{ route('admin.departamento.edit', $departamento->id) }}"
+                                                     <a href="{{ route('admin.avaliacao.edit', $avaliacao->id) }}"
                                                         class="dropdown-item">
                                                       <img src="assets/img/messages-2.jpg" alt="" class="rounded-circle">
                                                       Editar
                                                     </a>
                                                    
                                               </li>
-                                              @endif
                                               <li>
                                                 <hr class="dropdown-divider">
                                               </li>
-                                  
-                                                @if (Auth::user()->tipo_conta == "Administrador" || \App\Models\Acesso::where("idUser",Auth::user()->id)->where("menu","Departamentos")->where("nivel",">=",4)->get()->first())
                                               <li class="message-item">
-                                                <a href="{{ route('admin.departamento.delete', $departamento->id) }}"
+                                               
+                                                <a href="{{ route('admin.avaliacao.visualizar', $avaliacao->id) }}"
+                                                   class="dropdown-item">
+                                                 <img src="assets/img/messages-2.jpg" alt="" class="rounded-circle">
+                                                 Visualizar
+                                               </a>
+                                              
+                                         </li>
+                                         <li>
+                                           <hr class="dropdown-divider">
+                                         </li>
+                                  
+                                              <li class="message-item">
+                                                <a href="{{ route('admin.avaliacao.delete', $avaliacao->id) }}"
                                                     class="dropdown-item"
                                                     data-confirm="Are you sure that?">
                                                   <img src="assets/img/messages-2.jpg" alt="" class="rounded-circle">
                                                   Eliminar
                                                 </a>
                                               </li>
-                                              @endif
                                               <li>
                                                 <hr class="dropdown-divider">
-                                              
-                                                @if (Auth::user()->tipo_conta == "Administrador" || \App\Models\Acesso::where("idUser",Auth::user()->id)->where("menu","Departamentos")->where("nivel",">=",5)->get()->first())</li>
+                                              </li>
                                               <li class="message-item">
-                                                <a href="{{ route('admin.departamento.purge', $departamento->id) }}"
+                                                <a href="{{ route('admin.avaliacao.purge', $avaliacao->id) }}"
                                                     class="dropdown-item"
                                                     data-confirm="Tem certeza que deseja eliminar permanentemente?">
                                                  
@@ -119,7 +126,6 @@
                                                    
                                                 </a>
                                               </li>
-                                              @endif
                                             
                                   
                                   
@@ -142,19 +148,20 @@
                 </div>
             </section>
         @elseif($page == "criar")
-               {{--  departamento creation --}}
+               {{--  avaliacao creation --}}
             <section class="section">
               <div class="row">
               <div class="col-lg-12">
       
                   <div class="card">
                   <div class="card-body">
-                      <h5 class="card-title">Cadastro de departamento</h5>
+                      <h5 class="card-title">Cadastro de avaliacao</h5>
                           
-                      <form action="{{ route('admin.departamento.store')}}" method="post"  enctype="multipart/form-data" class="row g-3 needs-validation" novalidate>
+                      <form action="{{ route('admin.avaliacao.store')}}" method="post"  enctype="multipart/form-data" class="row g-3 needs-validation" novalidate>
 
                         @csrf
-                        @include('forms._formDepartamento.index')
+                        @include('forms._formAvaliacao.index')
+                        <div class="col-md-12 row" id="dd"></div>
                           <div class="form-group text-center mx-auto col-md-3">
                             <label class="text-white">lorem</label>
                             <button type="submit" class="btn col-md-12" style="background-color: #012970; color:white;">
@@ -171,6 +178,93 @@
               
               </div>
           </section>
+          <script>
+            const selecionados = [];
+    
+            function selecionar() {
+                criterio = document.getElementById("idCriterio");
+                let id = criterio.options[criterio.selectedIndex].value;
+                let value = criterio.options[criterio.selectedIndex].innerHTML;
+                adicionar(parseInt(id), value);
+            }
+    
+            function adicionar(id, value) {
+                let existente = 0;
+                let existente2 = 0;
+                selecionados.push(id);
+                let df = selecionados.forEach(element => {
+                    if (element == id && existente == 0) {
+                        existente = 1
+                    } else if (existente == 1 && element == id) {
+                        selecionados.pop();
+                        existente = 0;
+                        existente2 = 1;
+                        return false;
+                    }
+                });
+                if (existente2) {
+                    existente2 = 0;
+                    return 0;
+                }
+                let numero = Math.floor(Math.random() * 100);
+                let componente = document.getElementById("dd");
+                let elemento = document.createElement("div");
+                elemento.classList.add("row");
+                elemento.id = `div${numero}`;
+                elemento.innerHTML = `@include('forms._formAvaliacao2.index', ['numero' => rand(1, 100)])`;
+                // console.log(((elemento.innerHTML).split('remover')[1]).split("'")[0]);
+                // elemento.appendChild("<h1>sss</h1>");
+                elemento.innerHTML = `
+                <div class="form-group col-sm-4">
+        <label for="idCriterio">{{ __('Criterio de Avaliação') }}</label>
+        <select type="text" class="form-control border-secondary" name="avaliacao[${numero}][idCriterio]" select required>
+                <option value="${ id }">
+                    ${ value }</option>
+        </select>
+    </div>
+    
+    <div class="form-group col-sm-4">
+        <label for="descricao" class="form-label">Descrição</label>
+        <input type="text" class="form-control" placeholder="Digite a descrição" name="avaliacao[${numero}][descricao]"
+            value="{{ isset($avaliacao->descricao) ? $avaliacao->descricao : '' }}" required>
+    </div>
+    
+    <div class="form-group col-sm-3">
+        <label for="idNivel">{{ __('Nivel de Avaliação') }}</label>
+        <select type="text" class="form-control border-secondary" name="avaliacao[${numero}][idNivel]" required>
+            @isset($avaliacao)
+                <option value="{{ isset($avaliacao->idNivel) ? $avaliacao->idNivel : '' }}">
+                    {{ $avaliacao->vc_nivel }}</option>
+            @else
+                <option disabled value="" selected>Selecione o Nivel de Avaliação</option>
+            @endisset
+            @if (isset($nivels))
+            
+                @foreach ($nivels as $nivel)
+                    <option value="{{ $nivel->id }}">{{ $nivel->nome }}</option>
+                @endforeach
+            
+            @else
+                <option disabled value="" selected>não existem Niveis de Avaliações cadastrados</option>
+            @endif
+           
+        </select>
+    </div>
+    
+    <div class=" col-sm-1 ">
+        <i style="color:#003B76" class="bi bi-x-circle"
+        id="remover${numero} " onclick="remover(div${numero}, ${ id } )"
+        ></i>
+                `;
+                componente.appendChild(elemento)
+            }
+    
+            function remover(id, criterio) {
+                let componente = document.getElementById("dd");
+                selecionados.splice(selecionados.indexOf(criterio), 1);
+                id.remove();
+            }
+        </script>
         @elseif($page=="editar")
           <section class="section">
             <div class="row">
@@ -178,12 +272,13 @@
     
                 <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">Edição de departamento</h5>
+                    <h5 class="card-title">Edição de avaliacao</h5>
                         
-                    <form action="{{ route('admin.departamento.update',$id)}}" method="post"  enctype="multipart/form-data" class="row g-3 needs-validation" novalidate>
+                    <form action="{{ route('admin.avaliacao.update',$id)}}" method="post"  enctype="multipart/form-data" class="row g-3 needs-validation" novalidate>
                       @method('put')
                       @csrf
-                      @include('forms._formDepartamento.index')
+                      @include('forms._formAvaliacao.index')
+                      <div class="col-md-12 row" id="dd"></div>
                         <div class="form-group text-center mx-auto col-md-3">
                           <label class="text-white">lorem</label>
                           <button type="submit" class="btn col-md-12" style="background-color: #012970; color:white;">
@@ -204,10 +299,10 @@
     @endisset
 
         {{-- CREATION --}}
-@if (session('departamento.create.success'))
+@if (session('avaliacao.create.success'))
 <script>
     Swal.fire(
-        'Departamento criado!',
+        'Avaliação criado!',
         '',
         'success'
     )
@@ -215,10 +310,10 @@
 </script>
 @endif
 
-@if (session('departamento.create.error'))
+@if (session('avaliacao.create.error'))
 <script>
     Swal.fire(
-        'Falha ao criar departamento!',
+        'Falha ao criar Avaliação!',
         '',
         'error'
     )
@@ -227,10 +322,10 @@
 @endif
 
 {{-- EDITION --}}
-@if (session('departamento.update.success'))
+@if (session('avaliacao.update.success'))
 <script>
     Swal.fire(
-        'departamento actualizado!',
+        'Avaliação actualizado!',
         '',
         'success'
     )
@@ -238,10 +333,10 @@
 </script>
 @endif
 
-@if (session('departamento.update.error'))
+@if (session('avaliacao.update.error'))
 <script>
     Swal.fire(
-        'Falha ao actualizar o departamento!',
+        'Falha ao actualizar o Avaliação!',
         '',
         'error'
     )
@@ -251,10 +346,10 @@
 
 {{-- DELETE --}}
 
-@if (session('departamento.delete.success'))
+@if (session('avaliacao.delete.success'))
 <script>
     Swal.fire(
-        'Departamento Eliminado',
+        'Avaliação Eliminado',
         '',
         'success'
     )
@@ -262,10 +357,10 @@
 </script>
 @endif
 
-@if (session('departamento.delete.error'))
+@if (session('avaliacao.delete.error'))
 <script>
     Swal.fire(
-        'Erro ao eliminar departamento!',
+        'Erro ao eliminar Avaliação!',
         '',
         'error'
     )
@@ -276,10 +371,10 @@
 
 {{--  PURGE --}}
 
-@if (session('departamento.purge.success'))
+@if (session('avaliacao.purge.success'))
 <script>
     Swal.fire(
-        'Departamento Purgado',
+        'Avaliação Purgado',
         '',
         'success'
     )
@@ -287,10 +382,10 @@
 </script>
 @endif
 
-@if (session('departamento.purge.error'))
+@if (session('avaliacao.purge.error'))
 <script>
     Swal.fire(
-        'Erro ao Purgar Departamento!',
+        'Erro ao Purgar Avaliação!',
         '',
         'error'
     )

@@ -1,5 +1,5 @@
 @extends('layouts.merge.painel')
-@section('titulo', 'Experiência do funcionario')
+@section('titulo', 'Acesso do funcionario')
 @section('conteudo')
 
 
@@ -7,11 +7,11 @@
 
 
     <div class="pagetitle">
-      <h1>Experiência do funcionario</h1>
+      <h1>Acesso do funcionario</h1>
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="#">Home</a></li>
-          <li class="breadcrumb-item">Experiência do funcionario</li>
+          <li class="breadcrumb-item">Acesso do funcionario</li>
           <li class="breadcrumb-item active">{{$page}}</li>
         </ol>
       </nav>
@@ -20,49 +20,55 @@
 
     @isset($page)
         @if ($page=="lista")
-        @if (Auth::user()->tipo_conta == "Administrador" || \App\Models\Acesso::where("idUser",Auth::user()->id)->where("menu","Experiência")->where("nivel",">=",2)->get()->first())
           <div class="d-flex justify-content-end mb-3">
-            <a class="btn " href="{{ route('admin.experiencia.create') }}" style="background-color: #012970;">
-                <strong class="text-light">Adicionar Experiência</strong>
+            <a class="btn " href="{{ route('admin.acesso.create') }}" style="background-color: #012970;">
+                <strong class="text-light">Adicionar Acesso</strong>
             </a>
           </div>
-          @endif
-            {{-- List of experiencias --}}
+            {{-- List of acessos --}}
             <section class="section">
                 <div class="row">
                 <div class="col-lg-12">
         
                     <div class="card">
                     <div class="card-body table-responsive">
-                        <h5 class="card-title">Lista de Experiência do funcionario</h5>
+                        <h5 class="card-title">Lista de Acesso do funcionario</h5>
                                 <!-- Table with stripped rows -->
                             <table class=" datatable ">
                                 <thead>
                                 <tr>
                                     <th scope="col">#</th>
                                     <th scope="col">Funcionario</th>
-                                    <th scope="col">Instituição</th>
-                                    <th scope="col">Cargo</th>
-                                    <th scope="col">Função</th>
-                                    <th scope="col">Data de início</th>
-                                    <th scope="col">Data de término</th>
+                                    <th scope="col">Utilizador</th>
+                                    <th scope="col">Menu</th>
+                                    <th scope="col">Nível</th>
                                     <th scope="col">Estado</th>               
                                     <th scope="col">Accções</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                              @foreach ($experiencias as $experiencia)
+                              @foreach ($acessos as $acesso)
                                 <tr>
-                                    <th scope="row">{{$experiencia->id}}</th>
-                                    <td>{{$experiencia->nome_funcionario}}</td>
-                                    <td>{{$experiencia->instituicao}}</td>
-                                    <td>{{$experiencia->cargo}}</td>
-                                    <td>{{$experiencia->funcao}}</td>
-                                    <td>{{$experiencia->dataInicio}}</td>
-                                    <td>{{$experiencia->dataFim}}</td>
-                                    <td>@if ($experiencia->status == 0)
+                                    <th scope="row">{{$acesso->id}}</th>
+                                    <td>{{$acesso->nome_funcionario}}</td>
+                                    <td>{{$acesso->nome_usuario}}</td>
+                                    <td>{{$acesso->menu}}</td>
+                                    <td>
+                                    @if ($acesso->nivel == 1)
+                                        Leitura
+                                    @elseif($acesso->nivel == 2)
+                                    Leitura | Escrita
+                                    @elseif($acesso->nivel == 3)
+                                    Leitura | Escrita | Modificação
+                                    @elseif($acesso->nivel == 4)
+                                    Leitura | Escrita | Modificação | Deletação
+                                    @elseif($acesso->nivel == 5)
+                                    Leitura | Escrita | Modificação | Deletação | Deletação permanente
+                                    @endif
+                                    </td>
+                                    <td>@if ($acesso->status == 0)
                                         <span style="color: red;">Desativado</span>
-                                    @elseif($experiencia->status == 1)
+                                    @elseif($acesso->status == 1)
                                        <span style="color: green;">Activo</span>
                                     @endif</td>  
                                    
@@ -90,35 +96,34 @@
                                 
                                           <ul class="dropdown-menu dropdown-menu-center dropdown-menu-arrow messages">
                                             
-                                             @if (Auth::user()->tipo_conta == "Administrador" || \App\Models\Acesso::where("idUser",Auth::user()->id)->where("menu","Experiência")->where("nivel",">=",3)->get()->first())
+                                
                                             <li class="message-item">
                                              
-                                                   <a href="{{ route('admin.experiencia.edit', $experiencia->id) }}"
+                                                   <a href="{{ route('admin.acesso.edit', $acesso->id) }}"
                                                       class="dropdown-item">
                                                     <img src="assets/img/messages-2.jpg" alt="" class="rounded-circle">
                                                     Editar
                                                   </a>
                                                  
                                             </li>
-                                            @endif
+
                                             <li>
                                               <hr class="dropdown-divider">
                                             </li>
-                                             @if (Auth::user()->tipo_conta == "Administrador" || \App\Models\Acesso::where("idUser",Auth::user()->id)->where("menu","Experiência")->where("nivel",">=",4)->get()->first())
+                                
                                             <li class="message-item">
-                                              <a href="{{ route('admin.experiencia.delete', $experiencia->id) }}"
+                                              <a href="{{ route('admin.acesso.delete', $acesso->id) }}"
                                                   class="dropdown-item"
                                                   data-confirm="Are you sure that?">
                                                 <img src="assets/img/messages-2.jpg" alt="" class="rounded-circle">
                                                 Eliminar
                                               </a>
                                             </li>
-                                            @endif
                                             <li>
                                               <hr class="dropdown-divider">
-                                             @if (Auth::user()->tipo_conta == "Administrador" || \App\Models\Acesso::where("idUser",Auth::user()->id)->where("menu","Experiência")->where("nivel",">=",5)->get()->first()) </li>
+                                            </li>
                                             <li class="message-item">
-                                              <a href="{{ route('admin.experiencia.purge', $experiencia->id) }}"
+                                              <a href="{{ route('admin.acesso.purge', $acesso->id) }}"
                                                   class="dropdown-item"
                                                   data-confirm="Tem certeza que deseja eliminar permanentemente?">
                                                
@@ -126,7 +131,7 @@
                                                  
                                               </a>
                                             </li>
-                                          @endif
+                                          
                                 
                                 
                                           </ul><!-- End Messages Dropdown Items -->
@@ -148,19 +153,19 @@
                 </div>
             </section>
         @elseif($page == "criar")
-               {{--  experiencia creation --}}
+               {{--  acesso creation --}}
             <section class="section">
               <div class="row">
               <div class="col-lg-12">
       
                   <div class="card">
                   <div class="card-body">
-                      <h5 class="card-title">Cadastro de experiencia do funcionario</h5>
+                      <h5 class="card-title">Cadastro de acesso do funcionario</h5>
                           
-                      <form action="{{ route('admin.experiencia.store')}}" method="post"  enctype="multipart/form-data" class="row g-3 needs-validation" novalidate>
+                      <form action="{{ route('admin.acesso.store')}}" method="post"  enctype="multipart/form-data" class="row g-3 needs-validation" novalidate>
 
                         @csrf
-                        @include('forms._formExperiencia.index')
+                        @include('forms._formAcesso.index')
                           <div class="form-group text-center mx-auto col-md-3">
                             <label class="text-white">lorem</label>
                             <button type="submit" class="btn col-md-12" style="background-color: #012970; color:white;">
@@ -184,12 +189,12 @@
     
                 <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">Edição de experiencia do funcionario</h5>
+                    <h5 class="card-title">Edição de acesso do funcionario</h5>
                         
-                    <form action="{{ route('admin.experiencia.update',$id)}}" method="post"  enctype="multipart/form-data" class="row g-3 needs-validation" novalidate>
+                    <form action="{{ route('admin.acesso.update',$id)}}" method="post"  enctype="multipart/form-data" class="row g-3 needs-validation" novalidate>
                       @method('put')
                       @csrf
-                      @include('forms._formExperiencia.index')
+                      @include('forms._formAcesso.index')
                         <div class="form-group text-center mx-auto col-md-3">
                           <label class="text-white">lorem</label>
                           <button type="submit" class="btn col-md-12" style="background-color: #012970; color:white;">
@@ -210,10 +215,10 @@
     @endisset
 
         {{-- CREATION --}}
-@if (session('experiencia.create.success'))
+@if (session('acesso.create.success'))
 <script>
     Swal.fire(
-        'Experiência do funcionario criada!',
+        'Acesso do funcionario criada!',
         '',
         'success'
     )
@@ -221,10 +226,10 @@
 </script>
 @endif
 
-@if (session('experiencia.create.error'))
+@if (session('acesso.create.error'))
 <script>
     Swal.fire(
-        'Falha ao criar experiência do funcionario!',
+        'Falha ao criar Acesso do funcionario!',
         '',
         'error'
     )
@@ -233,10 +238,10 @@
 @endif
 
 {{-- EDITION --}}
-@if (session('experiencia.update.success'))
+@if (session('acesso.update.success'))
 <script>
     Swal.fire(
-        'Experiência do funcionario actualizada!',
+        'Acesso do funcionario actualizada!',
         '',
         'success'
     )
@@ -244,10 +249,10 @@
 </script>
 @endif
 
-@if (session('experiencia.update.error'))
+@if (session('acesso.update.error'))
 <script>
     Swal.fire(
-        'Falha ao actualizar a experiência do funcionario!',
+        'Falha ao actualizar a Acesso do funcionario!',
         '',
         'error'
     )
@@ -257,10 +262,10 @@
 
 {{-- DELETE --}}
 
-@if (session('experiencia.delete.success'))
+@if (session('acesso.delete.success'))
 <script>
     Swal.fire(
-        'Experiência do funcionario eliminada',
+        'Acesso do funcionario eliminada',
         '',
         'success'
     )
@@ -268,10 +273,10 @@
 </script>
 @endif
 
-@if (session('experiencia.delete.error'))
+@if (session('acesso.delete.error'))
 <script>
     Swal.fire(
-        'Erro ao eliminar experiência do funcionario!',
+        'Erro ao eliminar Acesso do funcionario!',
         '',
         'error'
     )
@@ -282,10 +287,10 @@
 
 {{--  PURGE --}}
 
-@if (session('experiencia.purge.success'))
+@if (session('acesso.purge.success'))
 <script>
     Swal.fire(
-        'Experiência do funcionario purgada',
+        'Acesso do funcionario purgada',
         '',
         'success'
     )
@@ -293,10 +298,10 @@
 </script>
 @endif
 
-@if (session('experiencia.purge.error'))
+@if (session('acesso.purge.error'))
 <script>
     Swal.fire(
-        'Erro ao purgar experiência do funcionario!',
+        'Erro ao purgar Acesso do funcionario!',
         '',
         'error'
     )

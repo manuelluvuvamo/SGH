@@ -20,11 +20,13 @@
 
     @isset($page)
         @if ($page=="lista")
+        @if (Auth::user()->tipo_conta == "Administrador" || \App\Models\Acesso::where("idUser",Auth::user()->id)->where("menu","Formação")->where("nivel",">=",2)->get()->first())
           <div class="d-flex justify-content-end mb-3">
             <a class="btn " href="{{ route('admin.formacao.create') }}" style="background-color: #012970;">
                 <strong class="text-light">Adicionar Formação</strong>
             </a>
           </div>
+          @endif
             {{-- List of formacaos --}}
             <section class="section">
                 <div class="row">
@@ -88,7 +90,8 @@
                                 
                                           <ul class="dropdown-menu dropdown-menu-center dropdown-menu-arrow messages">
                                             
-                                
+                                            
+                                             @if (Auth::user()->tipo_conta == "Administrador" || \App\Models\Acesso::where("idUser",Auth::user()->id)->where("menu","Formação")->where("nivel",">=",3)->get()->first())
                                             <li class="message-item">
                                              
                                                    <a href="{{ route('admin.formacao.edit', $formacao->id) }}"
@@ -99,10 +102,12 @@
                                                  
                                             </li>
 
+                                            @endif
                                             <li>
                                               <hr class="dropdown-divider">
                                             </li>
-                                
+                                            
+                                             @if (Auth::user()->tipo_conta == "Administrador" || \App\Models\Acesso::where("idUser",Auth::user()->id)->where("menu","Formação")->where("nivel",">=",4)->get()->first())
                                             <li class="message-item">
                                               <a href="{{ route('admin.formacao.delete', $formacao->id) }}"
                                                   class="dropdown-item"
@@ -111,9 +116,11 @@
                                                 Eliminar
                                               </a>
                                             </li>
+                                            @endif
                                             <li>
                                               <hr class="dropdown-divider">
-                                            </li>
+                                              
+                                             @if (Auth::user()->tipo_conta == "Administrador" || \App\Models\Acesso::where("idUser",Auth::user()->id)->where("menu","Formação")->where("nivel",">=",5)->get()->first())</li>
                                             <li class="message-item">
                                               <a href="{{ route('admin.formacao.purge', $formacao->id) }}"
                                                   class="dropdown-item"
@@ -123,7 +130,7 @@
                                                  
                                               </a>
                                             </li>
-                                          
+                                            @endif
                                 
                                 
                                           </ul><!-- End Messages Dropdown Items -->

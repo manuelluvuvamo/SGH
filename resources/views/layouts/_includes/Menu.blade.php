@@ -251,85 +251,110 @@
 
      
       <li class="nav-heading">Configurações</li>
-
+      @if (Auth::user()->tipo_conta == "Administrador" || \App\Models\Acesso::where("idUser",Auth::user()->id)->where("menu","Utilizadores")->where("nivel",">=",1)->get()->first())
       <li class="nav-item">
         <a class="nav-link collapsed" href="{{route('admin.user.list')}}">
           <i class="bi bi-person  "></i>
           <span>Utilizadores</span>
         </a>
-      </li><!-- End Instituição Page Nav -->
+      </li><!-- End Utilizadores Page Nav -->
+      @endif
+     
 
       <li class="nav-heading">Recursos Humanos</li>
 
+      @if (Auth::user()->tipo_conta == "Administrador" || \App\Models\Acesso::where("idUser",Auth::user()->id)->where("menu","Instituição")->where("nivel",">=",1)->get()->first())
       <li class="nav-item">
         <a class="nav-link collapsed" href="{{route('admin.instituicao.list')}}">
           <i class="bi bi-building"></i>
           <span>Instituição</span>
         </a>
       </li><!-- End Instituição Page Nav -->
+      @endif
 
+      @if (Auth::user()->tipo_conta == "Administrador" || \App\Models\Acesso::where("idUser",Auth::user()->id)->where("menu","Departamentos")->where("nivel",">=",1)->get()->first())
       <li class="nav-item">
         <a class="nav-link collapsed" href="{{route('admin.departamento.list')}}">
           <i class="bi bi-door-closed"></i>
           <span>Departamentos</span>
         </a>
       </li><!-- End Departamentos Page Nav -->
-
+      @endif
+       @if (Auth::user()->tipo_conta == "Administrador" || \App\Models\Acesso::where("idUser",Auth::user()->id)->where("menu","Funções")->where("nivel",">=",1)->get()->first())
       <li class="nav-item">
         <a class="nav-link collapsed" href="{{route('admin.funcao.list')}}">
           <i class="bi bi-briefcase"></i>
           <span>Funções</span>
         </a>
       </li><!-- End User Page Nav -->
-
+      @endif
+       @if (Auth::user()->tipo_conta == "Administrador" || \App\Models\Acesso::where("idUser",Auth::user()->id)->where("menu","Funcionários")->where("nivel",">=",1)->get()->first())
       <li class="nav-item">
         <a class="nav-link collapsed" href="{{route('admin.funcionario.list')}}">
           <i class="bi bi-file-person"></i>
           <span>Funcionários</span>
         </a>
       </li><!-- End Funcionários Page Nav -->
-
-     
+      @endif
+      
       <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
           <i class="bi bi-journal-text"></i><span>Dados do funcionário</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
         <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+          @if (Auth::user()->tipo_conta == "Administrador" || \App\Models\Acesso::where("idUser",Auth::user()->id)->where("menu","Experiência")->where("nivel",">=",1)->get()->first())
           <li>
             <a href="{{route('admin.experiencia.list')}}">
               <i class="bi bi-circle"></i><span>Experiência</span>
             </a>
           </li>
+          @endif
+           @if (Auth::user()->tipo_conta == "Administrador" || \App\Models\Acesso::where("idUser",Auth::user()->id)->where("menu","Formação")->where("nivel",">=",1)->get()->first())
           <li>
             <a href="{{route('admin.formacao.list')}}">
               <i class="bi bi-circle"></i><span>Formação</span>
             </a>
           </li>
+          @endif
+           @if (Auth::user()->tipo_conta == "Administrador" || \App\Models\Acesso::where("idUser",Auth::user()->id)->where("menu","Admissão")->where("nivel",">=",1)->get()->first())
           <li>
             <a href="{{route('admin.admissao.list')}}">
               <i class="bi bi-circle"></i><span>Admissão</span>
             </a>
           </li>
+          @endif
+
+           @if (Auth::user()->tipo_conta == "Administrador" || \App\Models\Acesso::where("idUser",Auth::user()->id)->where("menu","Demissão")->where("nivel",">=",1)->get()->first())
           <li>
             <a href="{{route('admin.demissao.list')}}">
               <i class="bi bi-circle"></i><span>Demissão</span>
             </a>
           </li>
+          @endif
+
+           @if (Auth::user()->tipo_conta == "Administrador" || \App\Models\Acesso::where("idUser",Auth::user()->id)->where("menu","Remuneração")->where("nivel",">=",1)->get()->first())
           <li>
             <a href="{{route('admin.remuneracao.list')}}">
               <i class="bi bi-circle"></i><span>Remuneração</span>
             </a>
           </li>
+          @endif
+
+           @if (Auth::user()->tipo_conta == "Administrador" || \App\Models\Acesso::where("idUser",Auth::user()->id)->where("menu","Especialidade")->where("nivel",">=",1)->get()->first())
           <li>
             <a href="{{route('admin.especialidade.list')}}">
               <i class="bi bi-circle"></i><span>Especialidade</span>
             </a>
           </li>
+          @endif
+
+           @if (Auth::user()->tipo_conta == "Administrador" || \App\Models\Acesso::where("idUser",Auth::user()->id)->where("menu","Médico")->where("nivel",">=",1)->get()->first())
           <li>
             <a href="{{route('admin.medico.list')}}">
               <i class="bi bi-circle"></i><span>Dados de Médico</span>
             </a>
           </li>
+          @endif
         </ul>
       </li><!-- End Dados do funcionário Nav -->
 
@@ -338,21 +363,42 @@
           <i class="bi bi-star-half"></i><span>Avaliação do funcionário</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
         <ul id="avaliacao" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+          
+           @if (Auth::user()->tipo_conta == "Administrador" || \App\Models\Acesso::where("idUser",Auth::user()->id)->where("menu","Critérios")->where("nivel",">=",1)->get()->first())
           <li>
             <a href="{{route('admin.criterio-avaliacao.list')}}">
               <i class="bi bi-circle"></i><span>Critérios de avaliação</span>
             </a>
           </li>
+          @endif
+           @if (Auth::user()->tipo_conta == "Administrador" || \App\Models\Acesso::where("idUser",Auth::user()->id)->where("menu","Níveis")->where("nivel",">=",1)->get()->first())
           <li>
             <a href="{{route('admin.nivel-avaliacao.list')}}">
               <i class="bi bi-circle"></i><span>Níveis de avaliação</span>
             </a>
           </li>
+          @endif
+
+           @if (Auth::user()->tipo_conta == "Administrador" || \App\Models\Acesso::where("idUser",Auth::user()->id)->where("menu","Avaliações")->where("nivel",">=",1)->get()->first())
+          <li>
+            <a href="{{route('admin.avaliacao.list')}}">
+              <i class="bi bi-circle"></i><span>Avaliações</span>
+            </a>
+          </li>
+          @endif
           
         </ul>
       </li><!-- End avaliação do funcionário Nav -->
-      
+      @if (Auth::user()->tipo_conta == "Administrador")
+      <li class="nav-heading">Acessos e permissões</li>
 
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="{{route('admin.acesso.list')}}">
+          <i class="bi bi-shield-lock"></i>
+          <span>Acessos</span>
+        </a>
+      </li><!-- End Instituição Page Nav -->
+      @endif
 
      
 

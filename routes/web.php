@@ -277,5 +277,38 @@ Route::group(['middleware' => 'auth'], function () {
     
     //NÍVEL END
 
+    //AVALIAÇÃO START
+    Route::prefix('avaliacao')->group(function () {
+
+   
+        Route::get('/create', ['as' => 'admin.avaliacao.create', 'uses' => 'AvaliacaoController@create']);
+        Route::get('/edit/{id}', ['as' => 'admin.avaliacao.edit', 'uses' => 'AvaliacaoController@edit']);
+        Route::post('/store', ['as' => 'admin.avaliacao.store', 'uses' => 'AvaliacaoController@store']);
+        Route::get('/list', ['as' => 'admin.avaliacao.list', 'uses' => 'AvaliacaoController@list']);
+        Route::get('/delete/{id}', ['as' => 'admin.avaliacao.delete', 'uses' => 'AvaliacaoController@delete']);
+        Route::put('/update/{id}', ['as' => 'admin.avaliacao.update', 'uses' => 'AvaliacaoController@update']);
+        Route::get('/purge/{id}', ['as' => 'admin.avaliacao.purge', 'uses' => 'AvaliacaoController@purge']);
+        Route::get('/visualizar/{id}', ['as' => 'admin.avaliacao.visualizar', 'uses' => 'AvaliacaoController@show']);
+    });
+    
+    //AVALIAÇÃO END
+
+     //ACESSO START
+     Route::prefix('acesso')->group(function () {
+
+   
+        Route::get('/create', ['as' => 'admin.acesso.create', 'uses' => 'AcessoController@create']);
+        Route::get('/edit/{id}', ['as' => 'admin.acesso.edit', 'uses' => 'AcessoController@edit']);
+        Route::post('/store', ['as' => 'admin.acesso.store', 'uses' => 'AcessoController@store']);
+        Route::get('/list', ['as' => 'admin.acesso.list', 'uses' => 'AcessoController@list']);
+        Route::get('/delete/{id}', ['as' => 'admin.acesso.delete', 'uses' => 'AcessoController@delete']);
+        Route::put('/update/{id}', ['as' => 'admin.acesso.update', 'uses' => 'AcessoController@update']);
+        Route::get('/purge/{id}', ['as' => 'admin.acesso.purge', 'uses' => 'AcessoController@purge']);
+        Route::get('/visualizar/{id}', ['as' => 'admin.acesso.visualizar', 'uses' => 'AcessoController@show']);
+    });
+    
+    //ACESSO END
+
+
 
 });

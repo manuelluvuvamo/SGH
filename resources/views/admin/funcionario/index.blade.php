@@ -20,11 +20,13 @@
 
     @isset($page)
         @if ($page=="lista")
+        @if (Auth::user()->tipo_conta == "Administrador" || \App\Models\Acesso::where("idUser",Auth::user()->id)->where("menu","Funcionários")->where("nivel",">=",2)->get()->first())
           <div class="d-flex justify-content-end mb-3">
             <a class="btn " href="{{ route('admin.funcionario.create') }}" style="background-color: #012970;">
                 <strong class="text-light">Adicionar novo funcionário</strong>
             </a>
           </div>
+          @endif
             {{-- List of funcionarios --}}
             <section class="section">
                 <div class="row">
@@ -93,7 +95,8 @@
                                 
                                           <ul class="dropdown-menu dropdown-menu-center dropdown-menu-arrow messages">
                                             
-                                
+                                            
+                                             @if (Auth::user()->tipo_conta == "Administrador" || \App\Models\Acesso::where("idUser",Auth::user()->id)->where("menu","Funcionários")->where("nivel",">=",2)->get()->first())
                                             <li class="message-item">
                                              
                                                    <a href="{{ route('admin.funcionario.edit', $funcionario->id) }}"
@@ -101,8 +104,9 @@
                                                     <img src="assets/img/messages-2.jpg" alt="" class="rounded-circle">
                                                     Editar
                                                   </a>
-                                                 
-                                            </li>
+                                                 @endif
+                                              
+                                               @if (Auth::user()->tipo_conta == "Administrador" || \App\Models\Acesso::where("idUser",Auth::user()->id)->where("menu","Funcionários")->where("nivel",">=",1)->get()->first())  </li>
                                             <li class="message-item">
                                              
                                               <a href="{{ route('admin.funcionario.ver', $funcionario->id) }}"
@@ -112,7 +116,9 @@
                                              </a>
                                             
                                           </li>
+                                          @endif
 
+                                           @if (Auth::user()->tipo_conta == "Administrador" || \App\Models\Acesso::where("idUser",Auth::user()->id)->where("menu","Experiência")->where("nivel",">=",2)->get()->first())
                                           <li class="message-item">
                                              
                                             <a href="{{ route('admin.funcionario.addExperiencia', $funcionario->id) }}"
@@ -120,8 +126,9 @@
                                              <img src="assets/img/messages-2.jpg" alt="" class="rounded-circle">
                                              Adicionar experiência
                                            </a>
-                                          
-                                          </li>
+                                           @endif
+                                            
+                                           @if (Auth::user()->tipo_conta == "Administrador" || \App\Models\Acesso::where("idUser",Auth::user()->id)->where("menu","Formação")->where("nivel",">=",2)->get()->first())</li>
                                           <li class="message-item">
                                              
                                             <a href="{{ route('admin.funcionario.addFormacao', $funcionario->id) }}"
@@ -129,8 +136,9 @@
                                              <img src="assets/img/messages-2.jpg" alt="" class="rounded-circle">
                                              Adicionar formação
                                            </a>
-                                          
-                                          </li>
+                                           @endif
+                                            
+                                           @if (Auth::user()->tipo_conta == "Administrador" || \App\Models\Acesso::where("idUser",Auth::user()->id)->where("menu","Admissão")->where("nivel",">=",2)->get()->first())</li>
                                           <li class="message-item">
                                              
                                             <a href="{{ route('admin.funcionario.addAdmissao', $funcionario->id) }}"
@@ -140,11 +148,13 @@
                                            </a>
                                           
                                           </li>
+                                          @endif
 
                                             <li>
                                               <hr class="dropdown-divider">
                                             </li>
 
+                                             @if (Auth::user()->tipo_conta == "Administrador" || \App\Models\Acesso::where("idUser",Auth::user()->id)->where("menu","Demissão")->where("nivel",">=",2)->get()->first())
                                             <li class="message-item">
                                              
                                               <a href="{{ route('admin.funcionario.addDemissao', $funcionario->id) }}"
@@ -154,11 +164,13 @@
                                              </a>
                                             
                                             </li>
+                                            @endif
   
                                             <li>
                                               <hr class="dropdown-divider">
                                             </li>
 
+                                             @if (Auth::user()->tipo_conta == "Administrador" || \App\Models\Acesso::where("idUser",Auth::user()->id)->where("menu","Remuneração")->where("nivel",">=",2)->get()->first())
                                             <li class="message-item">
                                              
                                               <a href="{{ route('admin.funcionario.addRemuneracao', $funcionario->id) }}"
@@ -168,11 +180,13 @@
                                              </a>
                                             
                                             </li>
+                                            @endif
   
                                               <li>
                                                 <hr class="dropdown-divider">
                                               </li>
 
+                                               @if (Auth::user()->tipo_conta == "Administrador" || \App\Models\Acesso::where("idUser",Auth::user()->id)->where("menu","Médico")->where("nivel",">=",2)->get()->first())
                                               <li class="message-item">
                                              
                                                 <a href="{{ route('admin.funcionario.addMedico', $funcionario->id) }}"
@@ -183,11 +197,13 @@
                                                </a>
                                               
                                               </li>
+                                              @endif
     
                                                 <li>
                                                   <hr class="dropdown-divider">
                                                 </li>
-                                
+                                                
+                                                 @if (Auth::user()->tipo_conta == "Administrador" || \App\Models\Acesso::where("idUser",Auth::user()->id)->where("menu","Funcionários")->where("nivel",">=",3)->get()->first())
                                             <li class="message-item">
                                               <a href="{{ route('admin.funcionario.delete', $funcionario->id) }}"
                                                   class="dropdown-item"
@@ -195,10 +211,12 @@
                                                 <img src="assets/img/messages-2.jpg" alt="" class="rounded-circle">
                                                 Eliminar
                                               </a>
-                                            </li>
+                                            </
+                                            @endif
                                             <li>
                                               <hr class="dropdown-divider">
-                                            </li>
+                                              
+                                             @if (Auth::user()->tipo_conta == "Administrador" || \App\Models\Acesso::where("idUser",Auth::user()->id)->where("menu","Funcionários")->where("nivel",">=",5)->get()->first())</li>
                                             <li class="message-item">
                                               <a href="{{ route('admin.funcionario.purge', $funcionario->id) }}"
                                                   class="dropdown-item"
@@ -208,6 +226,7 @@
                                                  
                                               </a>
                                             </li>
+                                            @endif
                                           
                                 
                                 
