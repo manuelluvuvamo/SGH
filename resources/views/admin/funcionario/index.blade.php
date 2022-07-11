@@ -203,7 +203,7 @@
                                                   <hr class="dropdown-divider">
                                                 </li>
                                                 
-                                                 @if (Auth::user()->tipo_conta == "Administrador" || \App\Models\Acesso::where("idUser",Auth::user()->id)->where("menu","Funcionários")->where("nivel",">=",3)->get()->first())
+                                                 @if (Auth::user()->tipo_conta == "Administrador" || \App\Models\Acesso::where("idUser",Auth::user()->id)->where("menu","Funcionários")->where("nivel",">=",4)->get()->first())
                                             <li class="message-item">
                                               <a href="{{ route('admin.funcionario.delete', $funcionario->id) }}"
                                                   class="dropdown-item"

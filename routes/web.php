@@ -297,7 +297,7 @@ Route::group(['middleware' => 'auth'], function () {
      Route::prefix('acesso')->group(function () {
 
    
-        Route::get('/create', ['as' => 'admin.acesso.create', 'uses' => 'AcessoController@create']);
+        Route::get('/create/{tipo}', ['as' => 'admin.acesso.create', 'uses' => 'AcessoController@create']);
         Route::get('/edit/{id}', ['as' => 'admin.acesso.edit', 'uses' => 'AcessoController@edit']);
         Route::post('/store', ['as' => 'admin.acesso.store', 'uses' => 'AcessoController@store']);
         Route::get('/list', ['as' => 'admin.acesso.list', 'uses' => 'AcessoController@list']);

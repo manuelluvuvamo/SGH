@@ -21,10 +21,12 @@
     @isset($page)
         @if ($page=="lista")
           <div class="d-flex justify-content-end mb-3">
+            @if (Auth::user()->tipo_conta == "Administrador" || \App\Models\Acesso::where("idUser",Auth::user()->id)->where("menu","Médico")->where("nivel",">=",2)->get()->first())
             <a class="btn " href="{{ route('admin.medico.create') }}" style="background-color: #012970;">
                 <strong class="text-light">Adicionar novo médico</strong>
             </a>
           </div>
+          @endif
             {{-- List of medicos --}}
             <section class="section">
                 <div class="row">
@@ -85,6 +87,8 @@
                                           <ul class="dropdown-menu dropdown-menu-center dropdown-menu-arrow messages">
                                             
                                 
+                                           
+                                                @if (Auth::user()->tipo_conta == "Administrador" || \App\Models\Acesso::where("idUser",Auth::user()->id)->where("menu","Médico")->where("nivel",">=",3)->get()->first())
                                             <li class="message-item">
                                              
                                                    <a href="{{ route('admin.medico.edit', $medico->id) }}"
@@ -94,11 +98,13 @@
                                                   </a>
                                                  
                                             </li>
-
+                                            @endif
                                             <li>
                                               <hr class="dropdown-divider">
                                             </li>
                                 
+                                           
+                                                @if (Auth::user()->tipo_conta == "Administrador" || \App\Models\Acesso::where("idUser",Auth::user()->id)->where("menu","Médico")->where("nivel",">=",4)->get()->first())
                                             <li class="message-item">
                                               <a href="{{ route('admin.medico.delete', $medico->id) }}"
                                                   class="dropdown-item"
@@ -107,9 +113,12 @@
                                                 Eliminar
                                               </a>
                                             </li>
+                                            @endif
                                             <li>
                                               <hr class="dropdown-divider">
                                             </li>
+                                           
+                                                @if (Auth::user()->tipo_conta == "Administrador" || \App\Models\Acesso::where("idUser",Auth::user()->id)->where("menu","Médico")->where("nivel",">=",5)->get()->first())
                                             <li class="message-item">
                                               <a href="{{ route('admin.medico.purge', $medico->id) }}"
                                                   class="dropdown-item"
@@ -119,6 +128,7 @@
                                                  
                                               </a>
                                             </li>
+                                            @endif
                                           
                                 
                                 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Acesso;
+use App\Models\Departamento;
 use App\Models\Funcao;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
@@ -33,11 +34,16 @@ class AcessoController extends Controller
     }
 
 
-    public function create(){
+    public function create($tipo){
+
+        //dd($tipo);
         
         $data['page'] = "criar";
         $data['funcionarios'] = Funcionario::all();
         $data['users'] = User::all();
+        $data['tipo']= $tipo;
+        $data['departamentos'] = Departamento::all();
+        $data['funcaos'] = Funcao::all();
        
         return view('admin.acesso.index',$data);
     }
@@ -69,21 +75,92 @@ class AcessoController extends Controller
 
       try {
        
+        
+
+        if (isset($request->tipo)) {
+            # code...
+            switch ($request->tipo) {
+                case 'utilizador':
+                    # code...
+                    $funcionario = Funcionario:: where("idUser",$request->idUser)->get()->first();
       
+                    $acesso = Acesso::create([
+                    
+                        'idFuncionario' => $funcionario->id,
+                        'idUser' => $request->idUser,
+                        'menu' => $request->menu,
+                        'nivel' => $request->nivel,
+                        
+                        
+                    ]);
+                break;
+                case 'funcao':
+                    # code...
+
+                    $funcionarios = Funcionario::where('idFuncao',$request->idFuncao)->get();
+
+                    foreach ($funcionarios as  $funcionario) {
+                        # code...
+                        $user = User:: where("id",$funcionario->idUser)->get()->first();
+                        $acesso = Acesso::create([
+                    
+                            'idFuncionario' => $funcionario->id,
+                            'idUser' => $user->id,
+                            'menu' => $request->menu,
+                            'nivel' => $request->nivel,
+                            
+                            
+                        ]);
+                    }
+
+                   
+                break;
+
+                case 'departamento':
+                    # code...
+                    $funcaos = Funcao::where('id_departamento',$request->idDepartamento)->get();
+
+                    foreach ($funcaos as $funcao) {
+                        # code...
+                        $funcionarios = Funcionario::where('idFuncao',$funcao->id)->get();
+                        foreach ($funcionarios as  $funcionario) {
+                            # code...
+                            $user = User:: where("id",$funcionario->idUser)->get()->first();
+                            $acesso = Acesso::create([
+                        
+                                'idFuncionario' => $funcionario->id,
+                                'idUser' => $user->id,
+                                'menu' => $request->menu,
+                                'nivel' => $request->nivel,
+                                
+                                
+                            ]);
+                        }
+                    }
+                   
+                  
+                break;
+                
+                default:
+                    # code...
+                    $funcionario = Funcionario:: where("idUser",$request->idUser)->get()->first();
+      
+                    $acesso = Acesso::create([
+                    
+                        'idFuncionario' => $funcionario->id,
+                        'idUser' => $request->idUser,
+                        'menu' => $request->menu,
+                        'nivel' => $request->nivel,
+                        
+                        
+                    ]);
+                    break;
+            }
+        }
       
    
 
-        $funcionario = Funcionario:: where("idUser",$request->idUser)->get()->first();
-      
-            $acesso = Acesso::create([
-               
-                'idFuncionario' => $funcionario->id,
-                'idUser' => $request->idUser,
-                'menu' => $request->menu,
-                'nivel' => $request->nivel,
-                
-                
-            ]);
+        
 
             if ($acesso) {
               

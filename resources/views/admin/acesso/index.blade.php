@@ -21,9 +21,40 @@
     @isset($page)
         @if ($page=="lista")
           <div class="d-flex justify-content-end mb-3">
-            <a class="btn " href="{{ route('admin.acesso.create') }}" style="background-color: #012970;">
-                <strong class="text-light">Adicionar Acesso</strong>
-            </a>
+
+           <span class="nav-item dropdown">
+
+            <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown"  style="background-color: #012970;">
+              <strong class="text-light">Adicionar Acesso</strong>
+              <span class="badge bg-success badge-number"></span>
+            </a><!-- End actions Icon -->
+  
+            <ul class="dropdown-menu dropdown-menu-center dropdown-menu-arrow messages">
+              
+              
+              <li class="message-item">
+                <a class="btn " href="{{ route('admin.acesso.create','utilizador') }}" >
+                    <strong class="text-dark text-left"> Por utilizador</strong>
+                </a>
+              </li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li class="message-item">
+                <a class="btn " href="{{ route('admin.acesso.create','funcao') }}" >
+                    <strong class="text-dark text-left"> Por funcao</strong>
+                </a>
+              </li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li class="message-item">
+                <a class="btn " href="{{ route('admin.acesso.create','departamento') }}" >
+                    <strong class="text-dark text-left"> Por departamento</strong>
+                </a>
+              </li>
+            </ul>
+           </span>
           </div>
             {{-- List of acessos --}}
             <section class="section">
@@ -218,7 +249,7 @@
 @if (session('acesso.create.success'))
 <script>
     Swal.fire(
-        'Acesso do funcionario criada!',
+        'Acesso do funcionario criado!',
         '',
         'success'
     )

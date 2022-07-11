@@ -20,11 +20,13 @@
 
     @isset($page)
         @if ($page=="lista")
+        @if (Auth::user()->tipo_conta == "Administrador" || \App\Models\Acesso::where("idUser",Auth::user()->id)->where("menu","Demissão")->where("nivel",">=",2)->get()->first())
           <div class="d-flex justify-content-end mb-3">
             <a class="btn " href="{{ route('admin.demissao.create') }}" style="background-color: #012970;">
                 <strong class="text-light">Adicionar Demissão</strong>
             </a>
           </div>
+          @endif
             {{-- List of demissaos --}}
             <section class="section">
                 <div class="row">
@@ -84,7 +86,8 @@
                                 
                                           <ul class="dropdown-menu dropdown-menu-center dropdown-menu-arrow messages">
                                             
-                                
+                                            
+                                              @if (Auth::user()->tipo_conta == "Administrador" || \App\Models\Acesso::where("idUser",Auth::user()->id)->where("menu","Demissão")->where("nivel",">=",3)->get()->first())
                                             <li class="message-item">
                                              
                                                    <a href="{{ route('admin.demissao.edit', $demissao->id) }}"
@@ -94,11 +97,13 @@
                                                   </a>
                                                  
                                             </li>
+                                            @endif
 
                                             <li>
                                               <hr class="dropdown-divider">
                                             </li>
-                                
+                                            
+                                              @if (Auth::user()->tipo_conta == "Administrador" || \App\Models\Acesso::where("idUser",Auth::user()->id)->where("menu","Demissão")->where("nivel",">=",4)->get()->first())
                                             <li class="message-item">
                                               <a href="{{ route('admin.demissao.delete', $demissao->id) }}"
                                                   class="dropdown-item"
@@ -107,9 +112,11 @@
                                                 Eliminar
                                               </a>
                                             </li>
+                                            @endif
                                             <li>
                                               <hr class="dropdown-divider">
-                                            </li>
+                                              
+                                              @if (Auth::user()->tipo_conta == "Administrador" || \App\Models\Acesso::where("idUser",Auth::user()->id)->where("menu","Demissão")->where("nivel",">=",5)->get()->first())</li>
                                             <li class="message-item">
                                               <a href="{{ route('admin.demissao.purge', $demissao->id) }}"
                                                   class="dropdown-item"
@@ -119,6 +126,7 @@
                                                  
                                               </a>
                                             </li>
+                                            @endif
                                           
                                 
                                 

@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
-use App\Models\formacao;
+use App\Models\Formacao;
 use App\Models\Funcionario;
 use Illuminate\Support\Facades\Auth;
 

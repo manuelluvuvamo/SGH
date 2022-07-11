@@ -20,11 +20,13 @@
 
     @isset($page)
         @if ($page=="lista")
+        @if (Auth::user()->tipo_conta == "Administrador" || \App\Models\Acesso::where("idUser",Auth::user()->id)->where("menu","Avaliações")->where("nivel",">=",2)->get()->first())
           <div class="d-flex justify-content-end mb-3">
             <a class="btn " href="{{ route('admin.avaliacao.create') }}" style="background-color: #012970;">
                 <strong class="text-light">Adicionar nova  avaliação</strong>
             </a>
           </div>
+        @endif
             {{-- List of avaliacaos --}}
             <section class="section">
                 <div class="row">
@@ -81,7 +83,9 @@
                                   
                                             <ul class="dropdown-menu dropdown-menu-center dropdown-menu-arrow messages">
                                   
-                                              <li class="message-item">
+                                              
+                                                 @if (Auth::user()->tipo_conta == "Administrador" || \App\Models\Acesso::where("idUser",Auth::user()->id)->where("menu","Avaliações")->where("nivel",">=",3)->get()->first())
+                                                <li class="message-item">
                                                
                                                      <a href="{{ route('admin.avaliacao.edit', $avaliacao->id) }}"
                                                         class="dropdown-item">
@@ -90,9 +94,12 @@
                                                     </a>
                                                    
                                               </li>
+                                              @endif
                                               <li>
                                                 <hr class="dropdown-divider">
                                               </li>
+                                              
+                                                 @if (Auth::user()->tipo_conta == "Administrador" || \App\Models\Acesso::where("idUser",Auth::user()->id)->where("menu","Avaliações")->where("nivel",">=",1)->get()->first())
                                               <li class="message-item">
                                                
                                                 <a href="{{ route('admin.avaliacao.visualizar', $avaliacao->id) }}"
@@ -102,11 +109,14 @@
                                                </a>
                                               
                                          </li>
+                                         @endif
                                          <li>
                                            <hr class="dropdown-divider">
                                          </li>
                                   
-                                              <li class="message-item">
+                                              
+                                             @if (Auth::user()->tipo_conta == "Administrador" || \App\Models\Acesso::where("idUser",Auth::user()->id)->where("menu","Avaliações")->where("nivel",">=",4)->get()->first())
+                                         <li class="message-item">
                                                 <a href="{{ route('admin.avaliacao.delete', $avaliacao->id) }}"
                                                     class="dropdown-item"
                                                     data-confirm="Are you sure that?">
@@ -114,9 +124,12 @@
                                                   Eliminar
                                                 </a>
                                               </li>
+                                              @endif
                                               <li>
                                                 <hr class="dropdown-divider">
                                               </li>
+                                              
+                                                 @if (Auth::user()->tipo_conta == "Administrador" || \App\Models\Acesso::where("idUser",Auth::user()->id)->where("menu","Avaliações")->where("nivel",">=",5)->get()->first())
                                               <li class="message-item">
                                                 <a href="{{ route('admin.avaliacao.purge', $avaliacao->id) }}"
                                                     class="dropdown-item"
@@ -126,6 +139,7 @@
                                                    
                                                 </a>
                                               </li>
+                                              @endif
                                             
                                   
                                   

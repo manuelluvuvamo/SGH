@@ -1,5 +1,88 @@
   <!-- Custom Styled Validation -->
- 
+
+  <input type="text" name="tipo" id="tipo" hidden value="{{isset($tipo)?$tipo:''}}">
+  @if (isset($tipo) && $tipo == "utilizador")
+      
+    <div class="col-md-4">
+      <label for="idUser" class="form-label">Utilizador</label>
+      <select class="form-select @error('idUser') is-invalid @enderror" id="idUser"  name="idUser" value="old('idUser')" required>
+      
+        <option value="{{ isset($acesso) ? $acesso->idUser : '0' }}"  {{isset($func)?'':'selected'}}>
+          {{ isset($acesso) ? $acesso->nome_usuario : 'Seleccionar utilizador' }}
+      </option>
+        
+        @isset($users)
+        @foreach ($users as $user)
+        <option value="{{$user->id}}" {{isset($func)?'selected':''}} >{{$user->name}}</option>
+        @endforeach
+            
+        @endisset
+      
+      
+      
+      </select>
+      @error('idUser')
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+        @enderror
+    </div>
+    @elseif (isset($tipo) && $tipo == "departamento")
+      
+    <div class="col-md-4">
+      <label for="idDepartamento" class="form-label">Departamentos</label>
+      <select class="form-select @error('idDepartamento') is-invalid @enderror" id="idDepartamento"  name="idDepartamento" value="old('idDepartamento')" required>
+      
+        <option value="{{ isset($acesso) ? $acesso->idDepartamento : '0' }}"  {{isset($func)?'':'selected'}}>
+          {{ isset($acesso) ? $acesso->nome_usuario : 'Seleccionar departamento' }}
+      </option>
+        
+        @isset($departamentos)
+        @foreach ($departamentos as $departamento)
+        <option value="{{$departamento->id}}" {{isset($func)?'selected':''}} >{{$departamento->nome}}</option>
+        @endforeach
+            
+        @endisset
+      
+      
+      
+      </select>
+      @error('idDepartamento')
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+        @enderror
+    </div>
+
+    @elseif (isset($tipo) && $tipo == "funcao")
+      
+    <div class="col-md-4">
+      <label for="idFuncao" class="form-label">Função</label>
+      <select class="form-select @error('idFuncao') is-invalid @enderror" id="idFuncao"  name="idFuncao" value="old('idFuncao')" required>
+      
+        <option value="{{ isset($acesso) ? $acesso->idFuncao : '0' }}"  {{isset($func)?'':'selected'}}>
+          {{ isset($acesso) ? $acesso->nome_usuario : 'Seleccionar função' }}
+      </option>
+        
+        @isset($funcaos)
+        @foreach ($funcaos as $funcao)
+        <option value="{{$funcao->id}}" {{isset($func)?'selected':''}} >{{$funcao->nome}}</option>
+        @endforeach
+            
+        @endisset
+      
+      
+      
+      </select>
+      @error('idFuncao')
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+        @enderror
+    </div>
+
+  @else
+
   <div class="col-md-4">
     <label for="idUser" class="form-label">Utilizador</label>
     <select class="form-select @error('idUser') is-invalid @enderror" id="idUser"  name="idUser" value="old('idUser')" required>
@@ -14,9 +97,9 @@
       @endforeach
           
       @endisset
-     
-     
-     
+    
+    
+    
     </select>
     @error('idUser')
           <span class="invalid-feedback" role="alert">
@@ -24,6 +107,7 @@
           </span>
       @enderror
   </div>
+  @endif
 
 
   <div class="col-md-4">

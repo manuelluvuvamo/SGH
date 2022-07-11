@@ -40,6 +40,7 @@
     {{-- sweet alert --}}
     <link rel="stylesheet" href="{{asset('/dashboard/css/sweetalert2.min.css')}}">
     <script src="{{asset('/dashboard/js/sweetalert2.all.min.js')}}"></script>
+    
 
   <!-- =======================================================
   * Template Name: NiceAdmin - v2.2.2
