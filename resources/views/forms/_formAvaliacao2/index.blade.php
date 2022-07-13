@@ -3,7 +3,7 @@
     <select type="text" class="form-control border-secondary" name="avaliacao[{{$numero}}][idCriterio]" disabled required>
         @isset($avaliacao)
             <option value="{{ isset($avaliacao->idCriterio) ? $avaliacao->idCriterio : '' }}">
-                {{ $avaliacao->vc_criterio }}</option>
+                {{ $avaliacao->criterio }}</option>
         @else
             <option disabled value="" selected>Selecione o Criterio de Avaliação</option>
         @endisset
@@ -31,7 +31,7 @@
     <select type="text" class="form-control border-secondary" name="avaliacao[{{$numero}}][idNivel]" required>
         @isset($avaliacao)
             <option value="{{ isset($avaliacao->idNivel) ? $avaliacao->idNivel : '' }}">
-                {{ $avaliacao->vc_nivel }}</option>
+                {{ $avaliacao->nivel }}</option>
         @else
             <option disabled value="" selected>Selecione o Nivel de Avaliação</option>
         @endisset

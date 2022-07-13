@@ -309,6 +309,36 @@ Route::group(['middleware' => 'auth'], function () {
     
     //ACESSO END
 
+    //PATOLOGIA START
+    Route::prefix('patologia')->group(function () {
 
+   
+        Route::get('/create', ['as' => 'admin.patologia.create', 'uses' => 'PatologiaController@create']);
+        Route::get('/edit/{id}', ['as' => 'admin.patologia.edit', 'uses' => 'PatologiaController@edit']);
+        Route::post('/store', ['as' => 'admin.patologia.store', 'uses' => 'PatologiaController@store']);
+        Route::get('/list', ['as' => 'admin.patologia.list', 'uses' => 'PatologiaController@list']);
+        Route::get('/delete/{id}', ['as' => 'admin.patologia.delete', 'uses' => 'PatologiaController@delete']);
+        Route::put('/update/{id}', ['as' => 'admin.patologia.update', 'uses' => 'PatologiaController@update']);
+        Route::get('/purge/{id}', ['as' => 'admin.patologia.purge', 'uses' => 'PatologiaController@purge']);
+        Route::get('/visualizar/{id}', ['as' => 'admin.patologia.visualizar', 'uses' => 'PatologiaController@show']);
+    });
+    
+    //PATOLOGIA END
+
+     //PACIENTE START
+     Route::prefix('paciente')->group(function () {
+
+   
+        Route::get('/create', ['as' => 'admin.paciente.create', 'uses' => 'PacienteController@create']);
+        Route::get('/edit/{id}', ['as' => 'admin.paciente.edit', 'uses' => 'PacienteController@edit']);
+        Route::post('/store', ['as' => 'admin.paciente.store', 'uses' => 'PacienteController@store']);
+        Route::get('/list', ['as' => 'admin.paciente.list', 'uses' => 'PacienteController@list']);
+        Route::get('/delete/{id}', ['as' => 'admin.paciente.delete', 'uses' => 'PacienteController@delete']);
+        Route::put('/update/{id}', ['as' => 'admin.paciente.update', 'uses' => 'PacienteController@update']);
+        Route::get('/purge/{id}', ['as' => 'admin.paciente.purge', 'uses' => 'PacienteController@purge']);
+        Route::get('/visualizar/{id}', ['as' => 'admin.paciente.visualizar', 'uses' => 'PacienteController@show']);
+    });
+    
+    //PACIENTE END
 
 });

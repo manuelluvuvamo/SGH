@@ -248,7 +248,7 @@
         <select type="text" class="form-control border-secondary" name="avaliacao[${numero}][idNivel]" required>
             @isset($avaliacao)
                 <option value="{{ isset($avaliacao->idNivel) ? $avaliacao->idNivel : '' }}">
-                    {{ $avaliacao->vc_nivel }}</option>
+                    {{ $avaliacao->nivel }}</option>
             @else
                 <option disabled value="" selected>Selecione o Nivel de Avaliação</option>
             @endisset
@@ -309,6 +309,106 @@
             
             </div>
           </section>
+          <script>
+            let numero;
+            let componente;
+            let elemento;
+            const selecionados = [];
+    
+            function selecionar() {
+                criterio = document.getElementById("idCriterio");
+                let id = criterio.options[criterio.selectedIndex].value;
+                let value = criterio.options[criterio.selectedIndex].innerHTML;
+                adicionar(parseInt(id), value);
+            }
+    
+            function adicionar(id, value, descricao) {
+                let existente = 0;
+                let existente2 = 0;
+                selecionados.push(id);
+                let df = selecionados.forEach(element => {
+                    if (element == id && existente == 0) {
+                        existente = 1
+                    } else if (existente == 1 && element == id) {
+                        selecionados.pop();
+                        existente = 0;
+                        existente2 = 1;
+                        return false;
+                    }
+                });
+                if (existente2) {
+                    existente2 = 0;
+                    return 0;
+                }
+    
+                numero = Math.floor(Math.random() * 100);
+                componente = document.getElementById("dd");
+                elemento = document.createElement("div");
+                elemento.classList.add("row");
+                elemento.id = `div${numero}`;
+                elemento.innerHTML = `@include('forms._formAvaliacao2.index', ['numero' => rand(1, 100)])`;
+                // console.log(((elemento.innerHTML).split('remover')[1]).split("'")[0]);
+                // elemento.appendChild("<h1>sss</h1>");
+                elemento.innerHTML = `
+                <div class="form-group col-sm-4">
+        <label for="idCriterio">{{ __('Criterio de Avaliação') }}</label>
+        <select type="text" class="form-control border-secondary" name="avaliacao[${numero}][idCriterio]"
+            id="avaliacao[${numero}][idCriterio]" select required>
+                <option value="${ id }">
+                    ${ value }</option>
+        </select>
+    </div>
+    
+    <div class="form-group col-sm-4">
+        <label for="descricao" class="form-label">Descrição</label>
+        <input type="text" class="form-control" placeholder="Digite o Nome da Area" name="avaliacao[${numero}][descricao]"
+            value="${descricao ? descricao : ''}" required>
+    </div>
+    
+    <div class="form-group col-sm-3">
+        <label for="idNivel">{{ __('Nivel de Avaliação') }}</label>
+        <select type="text" class="form-control border-secondary" name="avaliacao[${numero}][idNivel]" required>
+            @isset($avaliacao)
+                <option value="{{ isset($avaliacao->idNivel) ? $avaliacao->idNivel : '' }}">
+                    {{ $avaliacao->nivel }}</option>
+            @else
+                <option disabled value="" selected>Selecione o Nivel de Avaliação</option>
+            @endisset
+            @if (isset($nivels))
+            
+                @foreach ($nivels as $nivel)
+                    <option value="{{ $nivel->id }}">{{ $nivel->nome }}</option>
+                @endforeach
+            
+            @else
+                <option disabled value="" selected>não existem Niveis de Avaliações cadastrados</option>
+            @endif
+           
+        </select>
+    </div>
+    
+    <div class=" col-sm-1 ">
+        <i style="color:#003B76" class="bi bi-x-circle"
+        id="remover${numero} " onclick="remover(div${numero}, ${id})"
+        ></i>
+                `;
+                componente.appendChild(elemento)
+            }
+    
+            function remover(id, criterio) {
+                let componente = document.getElementById("dd");
+                selecionados.splice(selecionados.indexOf(criterio), 1);
+                id.remove();
+            }
+        </script>
+    
+    
+        <script>
+            let avaliacaos = (@php echo $avaliacaos @endphp)
+            avaliacaos.forEach(item => {
+                adicionar(item.idCriterio, item.criterio, item.descricao);
+            })
+        </script>
         @endif
     @endisset
 

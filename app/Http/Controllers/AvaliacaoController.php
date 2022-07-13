@@ -12,6 +12,7 @@ use App\Models\Departamento;
 use App\Models\Funcionario;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Nette\Utils\Json;
 class AvaliacaoController extends Controller
 {
     //
@@ -48,16 +49,49 @@ class AvaliacaoController extends Controller
     public function edit($id){
 
         $data['page'] = "editar";
-        $data['avaliacao'] = Avaliacao::join('departamentos', 'avaliacaos.id_departamento', 'departamentos.id')
+        if ($data['codigo'] = Codigo::find($id)) {
+            # code...
+            $avaliacao = Avaliacao::where('idCodigo', $id)->get()->first();
+            $data['avaliacao'] = DB::table('codigos')
+                ->join('avaliacaos', 'codigos.id', 'avaliacaos.idCodigo')
+                ->join('criterio_avaliacaos', 'avaliacaos.idCriterio', 'criterio_avaliacaos.id')
+                ->join('nivel_avaliacaos', 'avaliacaos.idNivel', 'nivel_avaliacaos.id')
+                ->join('funcionarios', 'avaliacaos.idFuncionario', 'funcionarios.id')
+                ->select(
+                    'codigos.*',
+                    'avaliacaos.idCriterio',
+                    'avaliacaos.idNivel',
+                    'funcionarios.nome',
+                    'criterio_avaliacaos.nome as criterio',
+                    'nivel_avaliacaos.nome as nivel'
+                )
+                ->where([['codigos.id', $id]])
+                ->get()->first();
 
-        ->select(
-            'avaliacaos.*',
-            'departamentos.nome as nome_departamento',
-           
-        )
-        ->where('avaliacaos.id',$id)
-        ->get()->first();
-        $data['id'] =  $data['avaliacao']->id;
+                $data['avaliacaos'] = DB::table('codigos')
+                ->join('avaliacaos', 'codigos.id', 'avaliacaos.idCodigo')
+                ->join('criterio_avaliacaos', 'avaliacaos.idCriterio', 'criterio_avaliacaos.id')
+                ->join('nivel_avaliacaos', 'avaliacaos.idNivel', 'nivel_avaliacaos.id')
+                ->join('funcionarios', 'avaliacaos.idFuncionario', 'funcionarios.id')
+                ->select(
+                    'codigos.*',
+                    'avaliacaos.idCriterio',
+                    'avaliacaos.descricao',
+                    'funcionarios.nome',
+                    'criterio_avaliacaos.nome as criterio',
+                    'nivel_avaliacaos.nome as nivel'
+                )
+                ->where([['codigos.id', $id]])
+                ->get();
+
+                $data['avaliacaos'] = Json::encode($data['avaliacaos']);
+
+                $data['criterios'] = CriterioAvaliacao::get();
+                $data['nivels'] = NivelAvaliacao::get();
+                $dados['funcionarios'] = Funcionario::whereNotIn('id', [$avaliacao->idFuncionario])->get();
+                $data['id'] =  $data['avaliacao']->id;
+        }
+      
 
 
         $data['departamentos'] = Departamento::all();
@@ -104,33 +138,48 @@ class AvaliacaoController extends Controller
             
          try {
              //dd( $request->coins);
-            $validator=$request->validate([
-                'nome' => ['required', 'string', 'max:32'],
-                'id_departamento' => ['required'],
-               
-               
-            ]);
-
-                    # code...
-                    $avaliacao = Avaliacao::findOrFail($id);
-                    
- 
-                     
-                     $func = Avaliacao::findOrFail($id)->update([
-                        'nome' => $request->nome,
-                        'id_departamento' => $request->id_departamento,
-                        'qnt' => $request->qnt,                        
+           
+             $avaliacaos = Avaliacao::where('idCodigo', $id)->get();
+            $avaliacaos1 = Avaliacao::where('idCodigo', $id)->get()->first();
+            if (isset($request->avaliacao)) {
+                foreach ($avaliacaos as $avaliacao) {
+                    $existe = 0;
+                    foreach ($request->avaliacao as  $item) {
+                        if ($item['idCriterio'] == $avaliacao->idCriterio) {
+                            $existe = 1;
+                        }
+                    }
+                    if (!($existe)) {
+                        // dd($avaliacao);
+                        //Avaliacao::find($avaliacao->id)->delete();
+                        Avaliacao::findOrFail($avaliacao->id)->delete();
+                    }
+                }
+            }
+            foreach ($request->avaliacao as  $item) {
+                if (Avaliacao::where('idCriterio', $item['idCriterio'])->count()) {
+                    Avaliacao::where('id', $item['idCriterio'])->update([
+                        'descricao' => $item['descricao'],
+                        'idCriterio' => $item['idCriterio'],
+                        'idNivel' => $item['idNivel'],
+                        'idFuncionario' => $request->idFuncionario,
+                    ]);
+                } else {
+                    Avaliacao::create([
+                        'descricao' => $item['descricao'],
+                        'idCriterio' => $item['idCriterio'],
+                        'idNivel' => $item['idNivel'],
+                        'idFuncionario' => $request->idFuncionario,
+                        'idUser' => $avaliacaos1->idUser,
+                        'idCodigo' => $id,
                         
                     ]);
-    
-                         if ($func) {
-                        # code...
-                        
-                           
-                            return redirect()->back()->with('avaliacao.update.success',1);
-                        }else{
-                            return redirect()->back()->with('avaliacao.update.error',1);
-                        }
+                }
+            }     
+            
+            
+             return redirect()->back()->with('avaliacao.update.success',1);
+                       
                    
                 
                 
@@ -142,7 +191,7 @@ class AvaliacaoController extends Controller
     }
 
     public function show($id){
-        $data['avaliacao'] = DB::table('codigos')
+        $data['codigo'] =  DB::table('codigos')
         ->join('avaliacaos', 'codigos.id', 'avaliacaos.idCodigo')
         ->join('funcionarios', 'codigos.idFuncionario', 'funcionarios.id')
         ->join('users', 'avaliacaos.idUser', 'users.id')
@@ -152,8 +201,27 @@ class AvaliacaoController extends Controller
             'users.name',
             'avaliacaos.idUser'
         )
-        ->distinct()
-        ->get()->first();
+        ->where("codigos.id",$id)->get()->first();
+
+        $data['avaliacaos'] = DB::table('codigos')
+        ->join('avaliacaos', 'codigos.id', 'avaliacaos.idCodigo')
+        ->join('funcionarios', 'codigos.idFuncionario', 'funcionarios.id')
+        ->join('users', 'avaliacaos.idUser', 'users.id')
+        ->join('criterio_avaliacaos', 'avaliacaos.idCriterio', 'criterio_avaliacaos.id')
+        ->join('nivel_avaliacaos', 'avaliacaos.idNivel', 'nivel_avaliacaos.id')
+
+        ->select(
+            // 'codigos.*',
+            'funcionarios.nome',
+            'users.name',
+            'avaliacaos.*',
+            'criterio_avaliacaos.nome as criterio',
+            'nivel_avaliacaos.nome as nivel'
+        )
+        ->where("codigos.id",$id)
+        ->get();
+
+        //dd( $data['avaliacaos']);
 
         return view("admin.avaliacao.visualizar.index",$data);
     }
@@ -161,8 +229,11 @@ class AvaliacaoController extends Controller
     public function delete($id){
         try {
             
-            $avaliacao = Avaliacao::findOrFail($id);
-            Avaliacao::findOrFail($id)->delete();
+            
+            $codigo = Codigo::findOrFail($id);
+
+            Codigo::findOrFail($id)->delete();
+            Avaliacao::where("idCodigo",$id)->delete();
         return redirect()->back()->with('avaliacao.delete.success',1);
         } catch (\Throwable $th) {
             //throw $th;
@@ -170,14 +241,12 @@ class AvaliacaoController extends Controller
         }
     }
     public function purge($id){
-        try {
+         try {
             
-            $avaliacao = Avaliacao::findOrFail($id);
-            Avaliacao::findOrFail($id)->forceDelete();
-            if (is_dir($avaliacao->path)) {
-                # code...
-                unlink($avaliacao->path);
-            }
+            $codigo = Codigo::findOrFail($id);
+            Codigo::findOrFail($id)->forceDelete();
+            Avaliacao::where("idCodigo",$id)->forceDelete();
+           
         return redirect()->back()->with('avaliacao.purge.success',1);
         } catch (\Throwable $th) {
             //throw $th;

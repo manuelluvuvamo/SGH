@@ -3,7 +3,9 @@
 @section('conteudo')
  
     <div class="pagetitle">
-        <h1>  Visualizar Avaliação <b>{{ $avaliacao->id }}</h1>
+        <h1>  Visualizar Avaliação <b>{{ $codigo->id }}</b></h1>
+            <p>Avaliador: {{ $codigo->name }} <br> Funcionário: {{ $codigo->nome }}</p>
+           
         <nav>
           <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="index.html">Painel</a></li>
@@ -21,22 +23,24 @@
                     <thead>
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col">Funcionário</th>
-                        <th scope="col">Avaliador</th>
-                        <th scope="col">Data de avaliação</th>
+                        <th scope="col">Critério</th>
+                        <th scope="col">Nivel</th>
+                        <th scope="col">Descrição</th>
                     </tr>
                     </thead>
                     <tbody>
         
+                    @foreach ($avaliacaos as $avaliacao)
                     <tr>
                         <th scope="row">{{$avaliacao->id}}</th>
-                        <td>{{$avaliacao->nome}}</td>
-                        <td>{{$avaliacao->name}}</td>
-                        <td>{{$avaliacao->created_at}}</td>
+                        <td>{{$avaliacao->criterio}}</td>
+                        <td>{{$avaliacao->nivel}}</td>
+                        <td>{{$avaliacao->descricao}}</td>
                       
                        
                      
                     </tr>
+                    @endforeach
          
                   
                     </tbody>

@@ -132,6 +132,8 @@
       <option value="Critérios" {{ (isset($acesso->menu) && ($acesso->menu == "Critérios")) ? 'selected': '' }}>Critérios</option>
       <option value="Nívies" {{ (isset($acesso->menu) && ($acesso->menu == "Nívies")) ? 'selected': '' }}>Nívies</option>
       <option value="Avaliações" {{ (isset($acesso->menu) && ($acesso->menu == "Avaliações")) ? 'selected': '' }}>Avaliações</option>
+      <option value="Patologias" {{ (isset($acesso->menu) && ($acesso->menu == "Patologias")) ? 'selected': '' }}>Patologias</option>
+      <option value="Pacientes" {{ (isset($acesso->menu) && ($acesso->menu == "Pacientes")) ? 'selected': '' }}>Pacientes</option>
      
      
     </select>

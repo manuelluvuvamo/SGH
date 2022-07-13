@@ -389,6 +389,27 @@
           
         </ul>
       </li><!-- End avaliação do funcionário Nav -->
+
+      <li class="nav-heading">Consultoria</li>
+      @if (Auth::user()->tipo_conta == "Administrador" || \App\Models\Acesso::where("idUser",Auth::user()->id)->where("menu","Patologias")->where("nivel",">=",1)->get()->first())
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="{{route('admin.patologia.list')}}">
+          <i class="bi bi-heart-half"></i>
+          <span>Patologias</span>
+        </a>
+      </li><!-- End Patologias Page Nav -->
+      @endif
+
+      @if (Auth::user()->tipo_conta == "Administrador" || \App\Models\Acesso::where("idUser",Auth::user()->id)->where("menu","Pacientes")->where("nivel",">=",1)->get()->first())
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="{{route('admin.paciente.list')}}">
+          <i class="bi bi-person-lines-fill"></i>
+          <span>Pacientes</span>
+        </a>
+      </li><!-- End Pacientes Page Nav -->
+      @endif
+
+
       @if (Auth::user()->tipo_conta == "Administrador")
       <li class="nav-heading">Acessos e permissões</li>
 
