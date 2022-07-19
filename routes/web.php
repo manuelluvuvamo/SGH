@@ -341,4 +341,20 @@ Route::group(['middleware' => 'auth'], function () {
     
     //PACIENTE END
 
+    //HISTORICO CLINICO START
+    Route::prefix('historico_clinico')->group(function () {
+
+   
+        Route::get('/create/{id}', ['as' => 'admin.historico_clinico.create', 'uses' => 'HistoricoClinicoController@create']);
+        Route::get('/edit/{id}', ['as' => 'admin.historico_clinico.edit', 'uses' => 'HistoricoClinicoController@edit']);
+        Route::post('/store', ['as' => 'admin.historico_clinico.store', 'uses' => 'HistoricoClinicoController@store']);
+        Route::get('/list/{id}', ['as' => 'admin.historico_clinico.list', 'uses' => 'HistoricoClinicoController@list']);
+        Route::get('/delete/{id}', ['as' => 'admin.historico_clinico.delete', 'uses' => 'HistoricoClinicoController@delete']);
+        Route::put('/update/{id}', ['as' => 'admin.historico_clinico.update', 'uses' => 'HistoricoClinicoController@update']);
+        Route::get('/purge/{id}', ['as' => 'admin.historico_clinico.purge', 'uses' => 'HistoricoClinicoController@purge']);
+        Route::get('/visualizar/{id}', ['as' => 'admin.historico_clinico.visualizar', 'uses' => 'HistoricoClinicoController@show']);
+    });
+    
+    //HISTORICO CLINICO END
+
 });

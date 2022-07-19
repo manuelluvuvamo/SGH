@@ -61,18 +61,7 @@
         @enderror
     </div>
     
-    <div class="col-md-6 col-lg-6">
-      <label for="nacionalidade" class="form-label">Nacionalidade</label>
-      <input type="text" name="nacionalidade" class="form-control @error('nacionalidade') is-invalid @enderror" id="nacionalidade" value="{{isset($paciente->nacionalidade)?$paciente->nacionalidade:old('nacionalidade')}}" required>
-      <div class="valid-feedback">
-        parece bom!
-      </div>
-      @error('nacionalidade')
-            <span class="invalid-feedback" role="alert">
-                <strong>{{ $message }}</strong>
-            </span>
-        @enderror
-    </div>
+ 
     <div class="col-md-6 col-lg-6">
       <label for="telefone" class="form-label">Telefone</label>
       <input type="text" name="telefone" class="form-control @error('telefone') is-invalid @enderror" id="telefone" value="{{isset($paciente->telefone)?$paciente->telefone:old('telefone')}}" required>
@@ -87,12 +76,25 @@
     </div>
 
     <div class="col-md-6 col-lg-6">
-      <label for="email" class="form-label">Email</label>
-      <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" id="email" value="{{isset($paciente->email)?$paciente->email:old('email')}}" required>
+      <label for="peso" class="form-label">Peso</label>
+      <input type="number" min="1" step="0.0000000001" name="peso" class="form-control @error('peso') is-invalid @enderror" id="peso" value="{{isset($paciente->peso)?$paciente->peso:old('peso')}}" required>
       <div class="valid-feedback">
         parece bom!
       </div>
-      @error('email')
+      @error('peso')
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+        @enderror
+    </div>
+
+    <div class="col-md-6 col-lg-6">
+      <label for="pressaoArterial" class="form-label">Pressão Arterial</label>
+      <input type="number" min="1" step="0.0000000001" name="pressaoArterial" class="form-control @error('pressaoArterial') is-invalid @enderror" id="pressaoArterial" value="{{isset($paciente->pressaoArterial)?$paciente->pressaoArterial:old('pressaoArterial')}}" required>
+      <div class="valid-feedback">
+        parece bom!
+      </div>
+      @error('pressaoArterial')
             <span class="invalid-feedback" role="alert">
                 <strong>{{ $message }}</strong>
             </span>

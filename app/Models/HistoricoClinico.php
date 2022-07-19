@@ -6,20 +6,16 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Paciente extends Model
+class HistoricoClinico extends Model
 {
     use HasFactory;
     use SoftDeletes;
     protected $fillable = [
         'id',
-        'nome',
-        'dataNascimento',
-        'estadoCivil',
-        'numBI',
-        'telefone',
-        'endereco',
-        'peso',
-        'pressaoArterial',
+        'idPaciente',
+        'idPatologia',
+        'descricao',
+        'resultado',
         'status',
     ];
     protected $dates=['deleted_at'];

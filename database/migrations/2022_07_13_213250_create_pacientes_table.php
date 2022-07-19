@@ -18,10 +18,10 @@ class CreatePacientesTable extends Migration
             $table->string("nome");
             $table->date("dataNascimento");
             $table->string("estadoCivil");
-            $table->string("nacionalidade");
-            $table->string("numBI");
-            $table->string("email");
-            $table->string("telefone");
+            $table->double("peso");
+            $table->double("pressaoArterial");
+            $table->string("numBI")->nullable();
+            $table->string("telefone")->nullable();
             $table->longText("endereco");
             $table->integer('status')->default(1);
             $table->softDeletes();

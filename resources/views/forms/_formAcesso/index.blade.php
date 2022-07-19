@@ -134,6 +134,7 @@
       <option value="Avaliações" {{ (isset($acesso->menu) && ($acesso->menu == "Avaliações")) ? 'selected': '' }}>Avaliações</option>
       <option value="Patologias" {{ (isset($acesso->menu) && ($acesso->menu == "Patologias")) ? 'selected': '' }}>Patologias</option>
       <option value="Pacientes" {{ (isset($acesso->menu) && ($acesso->menu == "Pacientes")) ? 'selected': '' }}>Pacientes</option>
+      <option value="HistoricoClinico" {{ (isset($acesso->menu) && ($acesso->menu == "HistoricoClinico")) ? 'selected': '' }}>Historico Clínico</option>
      
      
     </select>

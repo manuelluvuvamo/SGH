@@ -1,5 +1,5 @@
 @extends('layouts.merge.painel')
-@section('titulo', 'Lista de Pacientes')
+@section('titulo', 'Histórico clínico do paciente')
 @section('conteudo')
 
 
@@ -7,11 +7,11 @@
 
 
     <div class="pagetitle">
-      <h1>Pacientes</h1>
+      <h1>Histórico clínico do paciente</h1>
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.html">Painel</a></li>
-          <li class="breadcrumb-item">Pacientes</li>
+          <li class="breadcrumb-item">Histórico clínico do paciente</li>
           <li class="breadcrumb-item active">{{$page}}</li>
         </ol>
       </nav>
@@ -20,55 +20,42 @@
 
     @isset($page)
         @if ($page=="lista")
-        @if (Auth::user()->tipo_conta == "Administrador" || \App\Models\Acesso::where("idUser",Auth::user()->id)->where("menu","Pacientes")->where("nivel",">=",2)->get()->first())
+        @if (Auth::user()->tipo_conta == "Administrador" || \App\Models\Acesso::where("idUser",Auth::user()->id)->where("menu","HistoricoClinico")->where("nivel",">=",2)->get()->first())
           <div class="d-flex justify-content-end mb-3">
-            <a class="btn " href="{{ route('admin.paciente.create') }}" style="background-color: #012970;">
-                <strong class="text-light">Adicionar novo paciente</strong>
+            <a class="btn " href="{{ route('admin.historico_clinico.create',$id) }}" style="background-color: #012970;">
+                <strong class="text-light">Adicionar novo histórico</strong>
             </a>
           </div>
           @endif
-            {{-- List of Pacientes --}}
+            {{-- List of historico_clinicos --}}
             <section class="section">
                 <div class="row">
                 <div class="col-lg-12">
         
                     <div class="card">
                     <div class="card-body table-responsive">
-                        <h5 class="card-title">Lista de Pacientes</h5>
+                        <h5 class="card-title">Histórico clínico do paciente</h5>
                                 <!-- Table with stripped rows -->
                             <table class=" datatable ">
                                 <thead>
                                 <tr>
                                     <th scope="col">#</th>
-                                    <th scope="col">Nome</th>
-                                    <th scope="col">Estado civil</th>
-                                    <th scope="col">BI</th>
-                                    <th scope="col">Peso</th>
-                                    <th scope="col">Pressão Arterial</th>
-                                    <th scope="col">telefone</th>
-                                    <th scope="col">endereço</th>
-                                    <th scope="col">Data de nascimento</th>
-                                    <th scope="col">Estado</th>
+                                    <th scope="col">Paciente</th>
+                                    <th scope="col">Patologia</th>
+                                    <th scope="col">Descrição</th>
+                                    <th scope="col">Resultado</th>
                                     <th scope="col">Accções</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                              @foreach ($pacientes as $paciente)
+                              @foreach ($historico_clinicos as $historico_clinico)
                                 <tr>
-                                    <th scope="row">{{$paciente->id}}</th>
-                                    <td>{{$paciente->nome}}</td>
-                                    <td>{{$paciente->estadoCivil}}</td>
-                                    <td>{{$paciente->peso}}</td>
-                                    <td>{{$paciente->pressaoArterial}}</td>
-                                    <td>{{$paciente->nome}}</td>
-                                    <td>{{$paciente->telefone}}</td>
-                                    <td>{{$paciente->endereco}}</td>
-                                    <td>{{$paciente->dataNascimento}}</td>
-                                    <td>@if ($paciente->status == 0)
-                                      <span style="color: red;">Desativado</span>
-                                  @elseif($paciente->status == 1)
-                                     <span style="color: green;">Activo</span>
-                                  @endif</td>
+                                    <th scope="row">{{$historico_clinico->id}}</th>
+                                    <td>{{$historico_clinico->nome_paciente}}</td>
+                                    <td>{{$historico_clinico->nome_patologia}}</td>
+                                    <td>{{$historico_clinico->descricao}}</td>
+                                    <td>{{$historico_clinico->resultado}}</td>
+                                    
                                    
                                     @csrf
                                     @method('delete')
@@ -92,13 +79,11 @@
                                             </a><!-- End actions Icon -->
                                   
                                             <ul class="dropdown-menu dropdown-menu-center dropdown-menu-arrow messages">
-                                  
-
-                                               @if (Auth::user()->tipo_conta == "Administrador" || \App\Models\Acesso::where("idUser",Auth::user()->id)->where("menu","Pacientes")->where("nivel",">=",3)->get()->first())
+                                              
+                                                @if (Auth::user()->tipo_conta == "Administrador" || \App\Models\Acesso::where("idUser",Auth::user()->id)->where("menu","HistoricoClinico")->where("nivel",">=",3)->get()->first())
                                               <li class="message-item">
-                                                
                                                
-                                                     <a href="{{ route('admin.paciente.edit', $paciente->id) }}"
+                                                     <a href="{{ route('admin.historico_clinico.edit', $historico_clinico->id) }}"
                                                         class="dropdown-item">
                                                       <img src="assets/img/messages-2.jpg" alt="" class="rounded-circle">
                                                       Editar
@@ -109,27 +94,10 @@
                                               <li>
                                                 <hr class="dropdown-divider">
                                               </li>
-
-                                              @if (Auth::user()->tipo_conta == "Administrador" || \App\Models\Acesso::where("idUser",Auth::user()->id)->where("menu","HistoricoClinico")->where("nivel",">=",2)->get()->first())
-                                              <li class="message-item">
-                                                
-                                               
-                                                     <a href="{{ route('admin.historico_clinico.list',$paciente->id) }}"
-                                                        class="dropdown-item">
-                                                      <img src="assets/img/messages-2.jpg" alt="" class="rounded-circle">
-                                                      Histórico Clinico
-                                                    </a>
-                                                   
-                                              </li>
-                                              @endif
-                                              <li>
-                                                <hr class="dropdown-divider">
-                                              </li>
                                   
-
-                                               @if (Auth::user()->tipo_conta == "Administrador" || \App\Models\Acesso::where("idUser",Auth::user()->id)->where("menu","Pacientes")->where("nivel",">=",4)->get()->first())
+                                                @if (Auth::user()->tipo_conta == "Administrador" || \App\Models\Acesso::where("idUser",Auth::user()->id)->where("menu","HistoricoClinico")->where("nivel",">=",4)->get()->first())
                                               <li class="message-item">
-                                                <a href="{{ route('admin.paciente.delete', $paciente->id) }}"
+                                                <a href="{{ route('admin.historico_clinico.delete', $historico_clinico->id) }}"
                                                     class="dropdown-item"
                                                     data-confirm="Are you sure that?">
                                                   <img src="assets/img/messages-2.jpg" alt="" class="rounded-circle">
@@ -139,11 +107,10 @@
                                               @endif
                                               <li>
                                                 <hr class="dropdown-divider">
-                                              </li>
-
-                                               @if (Auth::user()->tipo_conta == "Administrador" || \App\Models\Acesso::where("idUser",Auth::user()->id)->where("menu","Pacientes")->where("nivel",">=",5)->get()->first())
+                                              
+                                                @if (Auth::user()->tipo_conta == "Administrador" || \App\Models\Acesso::where("idUser",Auth::user()->id)->where("menu","HistoricoClinico")->where("nivel",">=",5)->get()->first())</li>
                                               <li class="message-item">
-                                                <a href="{{ route('admin.paciente.purge', $paciente->id) }}"
+                                                <a href="{{ route('admin.historico_clinico.purge', $historico_clinico->id) }}"
                                                     class="dropdown-item"
                                                     data-confirm="Tem certeza que deseja eliminar permanentemente?">
                                                  
@@ -174,19 +141,19 @@
                 </div>
             </section>
         @elseif($page == "criar")
-               {{--  paciente creation --}}
+               {{--  historico_clinico creation --}}
             <section class="section">
               <div class="row">
               <div class="col-lg-12">
       
                   <div class="card">
                   <div class="card-body">
-                      <h5 class="card-title">Cadastro de paciente</h5>
+                      <h5 class="card-title">Cadastro de histórico clinico</h5>
                           
-                      <form action="{{ route('admin.paciente.store')}}" method="post"  enctype="multipart/form-data" class="row g-3 needs-validation" novalidate>
+                      <form action="{{ route('admin.historico_clinico.store')}}" method="post"  enctype="multipart/form-data" class="row g-3 needs-validation" novalidate>
 
                         @csrf
-                        @include('forms._formPaciente.index')
+                        @include('forms._formHistoricoClinico.index')
                           <div class="form-group text-center mx-auto col-md-3">
                             <label class="text-white">lorem</label>
                             <button type="submit" class="btn col-md-12" style="background-color: #012970; color:white;">
@@ -210,12 +177,12 @@
     
                 <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">Edição de paciente</h5>
+                    <h5 class="card-title">Edição de historico_clinico</h5>
                         
-                    <form action="{{ route('admin.paciente.update',$id)}}" method="post"  enctype="multipart/form-data" class="row g-3 needs-validation" novalidate>
+                    <form action="{{ route('admin.historico_clinico.update',$id)}}" method="post"  enctype="multipart/form-data" class="row g-3 needs-validation" novalidate>
                       @method('put')
                       @csrf
-                      @include('forms._formPaciente.index')
+                      @include('forms._formHistoricoClinico.index')
                         <div class="form-group text-center mx-auto col-md-3">
                           <label class="text-white">lorem</label>
                           <button type="submit" class="btn col-md-12" style="background-color: #012970; color:white;">
@@ -236,10 +203,10 @@
     @endisset
 
         {{-- CREATION --}}
-@if (session('paciente.create.success'))
+@if (session('historico_clinico.create.success'))
 <script>
     Swal.fire(
-        'Paciente criado!',
+        'Historico Clínico criado!',
         '',
         'success'
     )
@@ -247,10 +214,10 @@
 </script>
 @endif
 
-@if (session('paciente.create.error'))
+@if (session('historico_clinico.create.error'))
 <script>
     Swal.fire(
-        'Falha ao criar paciente!',
+        'Falha ao criar Historico Clínico!',
         '',
         'error'
     )
@@ -259,10 +226,10 @@
 @endif
 
 {{-- EDITION --}}
-@if (session('paciente.update.success'))
+@if (session('historico_clinico.update.success'))
 <script>
     Swal.fire(
-        'Paciente actualizado!',
+        'Historico Clínico actualizado!',
         '',
         'success'
     )
@@ -270,10 +237,10 @@
 </script>
 @endif
 
-@if (session('paciente.update.error'))
+@if (session('historico_clinico.update.error'))
 <script>
     Swal.fire(
-        'Falha ao actualizar a paciente!',
+        'Falha ao actualizar o Historico Clínico!',
         '',
         'error'
     )
@@ -283,10 +250,10 @@
 
 {{-- DELETE --}}
 
-@if (session('paciente.delete.success'))
+@if (session('historico_clinico.delete.success'))
 <script>
     Swal.fire(
-        'Paciente Eliminad0',
+        'Historico Clínico Eliminado',
         '',
         'success'
     )
@@ -294,10 +261,10 @@
 </script>
 @endif
 
-@if (session('paciente.delete.error'))
+@if (session('historico_clinico.delete.error'))
 <script>
     Swal.fire(
-        'Erro ao eliminar paciente!',
+        'Erro ao eliminar Historico Clínico!',
         '',
         'error'
     )
@@ -308,10 +275,10 @@
 
 {{--  PURGE --}}
 
-@if (session('paciente.purge.success'))
+@if (session('historico_clinico.purge.success'))
 <script>
     Swal.fire(
-        'Paciente Purgado',
+        'Historico Clínico Purgado',
         '',
         'success'
     )
@@ -319,10 +286,10 @@
 </script>
 @endif
 
-@if (session('paciente.purge.error'))
+@if (session('historico_clinico.purge.error'))
 <script>
     Swal.fire(
-        'Erro ao Purgar paciente!',
+        'Erro ao Purgar Historico Clínico!',
         '',
         'error'
     )

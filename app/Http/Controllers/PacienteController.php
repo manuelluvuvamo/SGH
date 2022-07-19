@@ -50,9 +50,9 @@ class PacienteController extends Controller
                 'nome' => $request->nome,
                 'dataNascimento'  => $request->dataNascimento,
                 'estadoCivil'  => $request->estadoCivil,
-                'nacionalidade'  => $request->nacionalidade,
+                'peso'  => $request->peso,
+                'pressaoArterial'  => $request->pressaoArterial,
                 'numBI'  => $request->numBI,
-                'email'  => $request->email,
                 'telefone'  => $request->telefone,
                 'endereco'  => $request->endereco,
                 
@@ -82,9 +82,10 @@ class PacienteController extends Controller
                             'nome' => $request->nome,
                             'dataNascimento'  => $request->dataNascimento,
                             'estadoCivil'  => $request->estadoCivil,
-                            'nacionalidade'  => $request->nacionalidade,
+                            'peso'  => $request->peso,
+                            'pressaoArterial'  => $request->pressaoArterial,
                             'numBI'  => $request->numBI,
-                            'email'  => $request->email,
+        
                             'telefone'  => $request->telefone,
                             'endereco'  => $request->endereco,
                             
@@ -121,5 +122,13 @@ class PacienteController extends Controller
             //throw $th;
             return redirect()->back()->with('paciente.purge.error',1);
         }
+    }
+    public function addHistoricoClinico($id){
+        
+        $data['page'] = "criar";
+        $data['paci'] = 1;
+        $data['pacientes'] = Paciente::where("id",$id)->get();
+       
+        return view('admin.historico_clinico.index',$data);
     }
 }
