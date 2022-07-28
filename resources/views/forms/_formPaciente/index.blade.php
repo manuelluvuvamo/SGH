@@ -2,7 +2,7 @@
  
     
     
-    <div class="col-md-6 col-lg-6">
+    <div class="col-md-4 col-lg-4">
       <label for="nome" class="form-label">Nome</label>
       <input type="text" name="nome" class="form-control @error('nome') is-invalid @enderror" id="nome" value="{{isset($paciente->nome)?$paciente->nome:old('nome')}}" required>
       <div class="valid-feedback">
@@ -14,7 +14,7 @@
             </span>
         @enderror
     </div>
-    <div class="col-md-6 col-lg-6">
+    <div class="col-md-4 col-lg-4">
       <label for="numBI" class="form-label">BI</label>
       <input type="text"  name="numBI" class="form-control @error('numBI') is-invalid @enderror" id="numBI" value="{{isset($paciente->numBI)?$paciente->numBI:old('numBI')}}" required autofocus minlength="14" maxlength="14">
       <div class="valid-feedback"  >
@@ -26,7 +26,7 @@
             </span>
         @enderror
     </div>
-    <div class="col-md-6 col-lg-6">
+    <div class="col-md-4 col-lg-4">
       <label for="dataNascimento" class="form-label">Data de nascimento</label>
       <input type="date" name="dataNascimento" class="form-control @error('dataNascimento') is-invalid @enderror" id="dataNascimento" value="{{isset($paciente->dataNascimento)?$paciente->dataNascimento:old('dataNascimento')}}" required>
       <div class="valid-feedback">
@@ -38,7 +38,7 @@
             </span>
         @enderror
     </div>
-    <div class="col-md-6 col-lg-6">
+    <div class="col-md-4 col-lg-4">
       <label for="estadoCivil" class="form-label">Estado civil</label>
       <select class="form-select @error('estadoCivil') is-invalid @enderror" id="estadoCivil"  name="estadoCivil" value="old('estadoCivil')" required>
       
@@ -62,7 +62,7 @@
     </div>
     
  
-    <div class="col-md-6 col-lg-6">
+    <div class="col-md-4 col-lg-4">
       <label for="telefone" class="form-label">Telefone</label>
       <input type="text" name="telefone" class="form-control @error('telefone') is-invalid @enderror" id="telefone" value="{{isset($paciente->telefone)?$paciente->telefone:old('telefone')}}" required>
       <div class="valid-feedback">
@@ -75,7 +75,7 @@
         @enderror
     </div>
 
-    <div class="col-md-6 col-lg-6">
+    <div class="col-md-4 col-lg-4">
       <label for="peso" class="form-label">Peso</label>
       <input type="number" min="1" step="0.0000000001" name="peso" class="form-control @error('peso') is-invalid @enderror" id="peso" value="{{isset($paciente->peso)?$paciente->peso:old('peso')}}" required>
       <div class="valid-feedback">
@@ -88,7 +88,7 @@
         @enderror
     </div>
 
-    <div class="col-md-6 col-lg-6">
+    <div class="col-md-4 col-lg-4">
       <label for="pressaoArterial" class="form-label">Pressão Arterial</label>
       <input type="number" min="1" step="0.0000000001" name="pressaoArterial" class="form-control @error('pressaoArterial') is-invalid @enderror" id="pressaoArterial" value="{{isset($paciente->pressaoArterial)?$paciente->pressaoArterial:old('pressaoArterial')}}" required>
       <div class="valid-feedback">
@@ -100,7 +100,7 @@
             </span>
         @enderror
     </div>
-    <div class="col-md-6 col-lg-6">
+    <div class="col-md-4 col-lg-4">
       <label for="endereco" class="form-label">Endereço</label>
       <input type="text" name="endereco" class="form-control @error('endereco') is-invalid @enderror" id="endereco" value="{{isset($paciente->endereco)?$paciente->endereco:old('endereco')}}" required>
       <div class="valid-feedback">

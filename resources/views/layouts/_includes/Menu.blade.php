@@ -409,6 +409,24 @@
       </li><!-- End Pacientes Page Nav -->
       @endif
 
+      @if (Auth::user()->tipo_conta == "Administrador" || \App\Models\Acesso::where("idUser",Auth::user()->id)->where("menu","MarcacaoConsulta")->where("nivel",">=",1)->get()->first())
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="{{route('admin.marcacao_consulta.list')}}">
+          <i class="bi bi-journal-bookmark-fill"></i>
+          <span>Marcação de Consulta</span>
+        </a>
+      </li><!-- End Marcação de Consulta Page Nav -->
+      @endif
+
+      @if (Auth::user()->tipo_conta == "Administrador" || \App\Models\Acesso::where("idUser",Auth::user()->id)->where("menu","Consulta")->where("nivel",">=",1)->get()->first())
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="{{route('admin.consulta.list')}}">
+          <i class="bi bi-journal-bookmark-fill"></i>
+          <span>Consulta</span>
+        </a>
+      </li><!-- End Marcação de Consulta Page Nav -->
+      @endif
+
 
       @if (Auth::user()->tipo_conta == "Administrador")
       <li class="nav-heading">Acessos e permissões</li>

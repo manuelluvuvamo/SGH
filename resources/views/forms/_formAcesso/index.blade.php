@@ -135,6 +135,8 @@
       <option value="Patologias" {{ (isset($acesso->menu) && ($acesso->menu == "Patologias")) ? 'selected': '' }}>Patologias</option>
       <option value="Pacientes" {{ (isset($acesso->menu) && ($acesso->menu == "Pacientes")) ? 'selected': '' }}>Pacientes</option>
       <option value="HistoricoClinico" {{ (isset($acesso->menu) && ($acesso->menu == "HistoricoClinico")) ? 'selected': '' }}>Historico Clínico</option>
+      <option value="MarcacaoConsulta" {{ (isset($acesso->menu) && ($acesso->menu == "MarcacaoConsulta")) ? 'selected': '' }}>Marcação de Consulta</option>
+      <option value="Consulta" {{ (isset($acesso->menu) && ($acesso->menu == "Consulta")) ? 'selected': '' }}>Consulta</option>
      
      
     </select>

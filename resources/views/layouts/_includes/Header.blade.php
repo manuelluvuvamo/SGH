@@ -40,6 +40,17 @@
     {{-- sweet alert --}}
     <link rel="stylesheet" href="{{asset('/dashboard/css/sweetalert2.min.css')}}">
     <script src="{{asset('/dashboard/js/sweetalert2.all.min.js')}}"></script>
+
+
+    {{-- JQUERY E DATEPICKER --}}
+
+  <link rel="stylesheet" type="text/css"href="{{asset('/dashboard/css/bootstrap-datepicker.css')}}" target="_blank" rel="nofollow" > 
+
+  <script src="{{asset('/dashboard/js/jquery.min.js')}}"></script>
+
+  <script type="text/javascript" src="{{asset('/dashboard/js/bootstrap-datepicker.js')}}"></script> 
+
+    
     
 
   <!-- =======================================================

@@ -154,7 +154,7 @@
                       <form action="{{ route('admin.nivel-avaliacao.store')}}" method="post"  enctype="multipart/form-data" class="row g-3 needs-validation" novalidate>
 
                         @csrf
-                        @include('forms._formnivel.index')
+                        @include('forms._formNivel.index')
                           <div class="form-group text-center mx-auto col-md-3">
                             <label class="text-white">lorem</label>
                             <button type="submit" class="btn col-md-12" style="background-color: #012970; color:white;">
@@ -183,7 +183,7 @@
                     <form action="{{ route('admin.nivel-avaliacao.update',$id)}}" method="post"  enctype="multipart/form-data" class="row g-3 needs-validation" novalidate>
                       @method('put')
                       @csrf
-                      @include('forms._formnivel.index')
+                      @include('forms._formNivel.index')
                         <div class="form-group text-center mx-auto col-md-3">
                           <label class="text-white">lorem</label>
                           <button type="submit" class="btn col-md-12" style="background-color: #012970; color:white;">

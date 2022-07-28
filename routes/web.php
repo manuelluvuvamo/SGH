@@ -324,7 +324,6 @@ Route::group(['middleware' => 'auth'], function () {
     });
     
     //PATOLOGIA END
-
      //PACIENTE START
      Route::prefix('paciente')->group(function () {
 
@@ -356,5 +355,42 @@ Route::group(['middleware' => 'auth'], function () {
     });
     
     //HISTORICO CLINICO END
+
+     //MARCACAO DE CONSULTA START
+    
+    
+    //MARCACAO DE CONSULTA END
+    Route::prefix('marcacao_consulta')->group(function () {
+
+   
+        Route::get('/create', ['as' => 'admin.marcacao_consulta.create', 'uses' => 'MarcacaoConsultaController@create']);
+        Route::get('/edit/{id}', ['as' => 'admin.marcacao_consulta.edit', 'uses' => 'MarcacaoConsultaController@edit']);
+        Route::post('/store', ['as' => 'admin.marcacao_consulta.store', 'uses' => 'MarcacaoConsultaController@store']);
+        Route::get('/list', ['as' => 'admin.marcacao_consulta.list', 'uses' => 'MarcacaoConsultaController@list']);
+        Route::get('/delete/{id}', ['as' => 'admin.marcacao_consulta.delete', 'uses' => 'MarcacaoConsultaController@delete']);
+        Route::put('/update/{id}', ['as' => 'admin.marcacao_consulta.update', 'uses' => 'MarcacaoConsultaController@update']);
+        Route::get('/purge/{id}', ['as' => 'admin.marcacao_consulta.purge', 'uses' => 'MarcacaoConsultaController@purge']);
+        Route::get('/visualizar/{id}', ['as' => 'admin.marcacao_consulta.visualizar', 'uses' => 'MarcacaoConsultaController@show']);
+        Route::get('/datas-marcadas', ['as' => 'admin.datas_marcadas.create', 'uses' => 'MarcacaoConsultaController@getDatasMarcadas']);
+    });
+
+
+    //CONSULTA START
+ 
+    Route::prefix('consulta')->group(function () {
+
+   
+        Route::get('/create', ['as' => 'admin.consulta.create', 'uses' => 'ConsultaController@create']);
+        Route::get('/edit/{id}', ['as' => 'admin.consulta.edit', 'uses' => 'ConsultaController@edit']);
+        Route::post('/store', ['as' => 'admin.consulta.store', 'uses' => 'ConsultaController@store']);
+        Route::get('/list', ['as' => 'admin.consulta.list', 'uses' => 'ConsultaController@list']);
+        Route::get('/delete/{id}', ['as' => 'admin.consulta.delete', 'uses' => 'ConsultaController@delete']);
+        Route::put('/update/{id}', ['as' => 'admin.consulta.update', 'uses' => 'ConsultaController@update']);
+        Route::get('/purge/{id}', ['as' => 'admin.consulta.purge', 'uses' => 'ConsultaController@purge']);
+        Route::get('/visualizar/{id}', ['as' => 'admin.consulta.visualizar', 'uses' => 'ConsultaController@show']);
+        Route::get('/create-direct/{id}', ['as' => 'admin.consulta.create-direct', 'uses' => 'ConsultaController@createDirect']);
+    });
+    
+    //CONSULTA END
 
 });
