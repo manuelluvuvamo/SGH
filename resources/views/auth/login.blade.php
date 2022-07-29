@@ -39,9 +39,18 @@
   * Author: BootstrapMade.com
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
+
+  <style>
+    body{
+      background-image: url("dashboard/img/fundo/f1.jpg"); 
+      background-repeat: no-repeat;
+      background-size: 100% 100%;
+
+    }
+  </style>
 </head>
 
-<body>
+<body >
 
   <main>
 

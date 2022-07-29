@@ -2,7 +2,15 @@
 @section('titulo', 'Painel')
 @section('conteudo')
 
+<style>
+  body{
+    background-image: url("dashboard/img/fundo/f7.jpg"); 
+    background-repeat: no-repeat;
+    background-size: cover;
+    
 
+  }
+</style>
 
     <div class="pagetitle">
       <h1>Painel</h1>

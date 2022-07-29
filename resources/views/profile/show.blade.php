@@ -2,6 +2,8 @@
 @section('titulo', 'Perfil')
 @section('conteudo')
 
+
+
 <section class="section profile">
     <div class="row">
       <div class="col-xl-4">
